@@ -17,7 +17,8 @@ export default function App({
   isIcon,
   maxLength,
   disabled,
-  color
+  color,
+  readOnly
 }) {
   return (
     <Container
@@ -44,6 +45,7 @@ export default function App({
           placeholder={placeholder}
           maxLength={maxLength}
           name={name}
+          readOnly={readOnly}
         />
       </span>
     </Container>

@@ -50,9 +50,13 @@ export default function AuthProvider({ children }) {
         sweepstakes,
         purchases,
         sendPurchases,
-        purchasesFilter
+        purchasesFilter,
+        confirmPurchases,
+        setConfirmPurchases,
+        qrCode,
+        res_purchases
     } = Sweepstakes({ storage, socket, auth });
- 
+
     return (
         <AuthContext.Provider value={{
             signed: authenticated,
@@ -68,7 +72,11 @@ export default function AuthProvider({ children }) {
             sweepstakes,
             sendPurchases,
             purchases,
-            purchasesFilter
+            purchasesFilter,
+            confirmPurchases,
+            setConfirmPurchases,
+            qrCode,
+            res_purchases
         }}>
             {children}
 

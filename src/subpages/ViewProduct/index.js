@@ -9,7 +9,7 @@ import CvrtReal from '../../services/CvrtReal';
 
 export default function ViewProduct({ dataRouter, width, AuthContext }) {
   const { auth, signed, sendPurchases, setIsSignIn, purchases } = useContext(AuthContext);
-  const [btnValue, setbtnValue] = useState(5);
+  const [btnValue, setbtnValue] = useState(1);
 
   const Purchases = () => {
     const filter = purchases.filter(person =>
@@ -23,16 +23,18 @@ export default function ViewProduct({ dataRouter, width, AuthContext }) {
         numbers_cota: getQuota(cvrtArray(filter), btnValue).join(),
         award: dataRouter.title,
         price: total,
+        priceUnd: dataRouter.price,
         CPF: auth.CPF,
         phone: auth.phone,
         buyer: auth.name,
-        img: dataRouter.img
+        img: dataRouter.img,
+        qtd: btnValue
       })
     } else {
       setIsSignIn(true);
     }
   };
-console.log(btnValue)
+
   return (
     <Container>
       <h4>Produto</h4>

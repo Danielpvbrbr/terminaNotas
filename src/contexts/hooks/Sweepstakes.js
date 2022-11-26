@@ -5,6 +5,9 @@ import api from '../../services/api';
 export default function Sweepstakes(El) {
     const [sweepstakes, setSweepstakes] = useState([]);
     const [purchases, setPurchases] = useState([]);
+    const [confirmPurchases, setConfirmPurchases] = useState(false);
+    const [res_purchases, setRes_purchases] = useState([]);
+    const [qrCode, setqrCode] = useState([]);
     const [purchasesFilter, setPurchasesFilter] = useState([]);
 
     useEffect(() => {
@@ -20,17 +23,44 @@ export default function Sweepstakes(El) {
                 );
                 setPurchasesFilter(filter);
             });
+            El.socket.on('res_purchases', (res) => {
+                if (res.CPF === El.auth.CPF) {
+                    setRes_purchases(res);
+                };
+
+                if (confirmPurchases && res.time <= 1 && res.status === 'pending') {
+                    setConfirmPurchases(false);
+                };
+
+                if (res.status === 'approved') {
+                    setTimeout(function () {
+                        setConfirmPurchases(false);
+                    }, 10000);
+                };
+            });
         };
         getSweepstakes();
-    }, [El.auth.CPF, El.socket]);
- 
+    }, [El.auth.CPF, El.socket, confirmPurchases, qrCode.id_purchases]);
+
+
     async function sendPurchases(data) {
 
         await api.post('/AddPurchases', data,
             El.storage.config).then(res => {
                 if (res.status === 200) {
-                    alert(res.data.message);
-                    window.location.reload();
+                    const value = res.data.response;
+                    setqrCode({
+                        base64: value.base64,
+                        description: value.description,
+                        id_purchases: value.id_purchases,
+                        qr_code: value.qr_code,
+                        status: value.status,
+                        qtd: value.qtd,
+                        price: value.price,
+                        priceUnd: value.priceUnd
+                    })
+                    setConfirmPurchases(true);
+                    // window.location.reload();
                 } else {
                     alert(res.data.message);
                     window.location.reload();
@@ -44,7 +74,8 @@ export default function Sweepstakes(El) {
             img: data.img,
             price: data.price,
             status: data.status,
-            title: data.title
+            title: data.title,
+            qtd: data.qtd
         }, El.storage.config).then(res => {
             if (res.status === 200) {
                 alert(res.data.message);
@@ -54,7 +85,16 @@ export default function Sweepstakes(El) {
             }
         })
     };
-
-    return { sendImg, sweepstakes, purchases, sendPurchases, purchasesFilter }
+    return {
+        sendImg,
+        sweepstakes,
+        purchases,
+        sendPurchases,
+        purchasesFilter,
+        confirmPurchases,
+        setConfirmPurchases,
+        qrCode,
+        res_purchases
+    }
 
 }

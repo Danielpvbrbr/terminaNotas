@@ -31,15 +31,13 @@ export default function userAuth(EL) {
                     }).catch(err => {
                         const { isAuth } = err.response.data;
                         if (!isAuth) {
-                            localStorage.clear();
-                            setAuthenticated(false);
-                            api.defaults.headers.common['x-access-token'] = undefined;
-                            api.post('/logout');
+                            console.log('Deslogar');
+                            // signOut();
                         };
                     });
             };
         };
-        Auth()
+        Auth();
     }, [myId, leading]);
 
     async function signIn(data) {

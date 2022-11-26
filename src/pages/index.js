@@ -6,7 +6,9 @@ import {
     AreaBody,
     Info,
 } from "./styles";
-
+import SignIn from '../components/SignIn';
+import SignUp from '../components/SignUp';
+import ConfirmPurchase from '../components/ConfirmPurchase';
 import { AuthContext } from '../contexts/auth';
 import AreaWinners from '../components/AreaWinners';
 import AreaDoubt from '../components/AreaDoubt';
@@ -19,16 +21,21 @@ import ContactUs from './ContactUs';
 import Sales from './Sales';
 import UserList from './UserList';
 import MyAccount from './MyAccount';
-import SignIn from './SignIn';
-import SignUp from './SignUp';
-import Doubt from './Doubt';
 
+import Doubt from './Doubt';
 import ViewProduct from '../subpages/ViewProduct';
 import MyShopping from '../subpages/MyShopping';
 import MyData from '../subpages/MyData';
 
 export default function App() {
-    const { signed, isSignIn, setIsSignIn, isSignUp, setIsSignUp } = useContext(AuthContext);
+    const {
+        signed,
+        isSignIn,
+        setIsSignIn,
+        isSignUp,
+        setIsSignUp,
+        confirmPurchases,
+    } = useContext(AuthContext);
     const [route, setRoute] = useState('/Home');
     const [active, setActive] = useState('Active'); //Sweepstakes
     const [isMenu, setIsMenu] = useState(false);
@@ -54,7 +61,7 @@ export default function App() {
                     active={active}
                     setActive={setActive}
                     dataRouter={dataRouter}
-                    setDataRouter={setDataRouter}    
+                    setDataRouter={setDataRouter}
                 />
             case '/Winners':
                 return <Winners
@@ -139,6 +146,12 @@ export default function App() {
                     width={width < 500 ? 60 : 42}
                     AuthContext={AuthContext}
                     setActive={setActive}
+                />
+            }
+            {confirmPurchases &&
+                <ConfirmPurchase
+                    width={width}
+                    AuthContext={AuthContext}
                 />
             }
             <AreaMenu />
