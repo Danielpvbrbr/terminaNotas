@@ -42,7 +42,12 @@ export default function AuthProvider({ children }) {
         isSignIn,
         setIsSignIn,
         isSignUp,
-        setIsSignUp
+        setIsSignUp,
+        recoverPass,
+        data_Codig,
+        checking,
+        msgErr,
+        setMsgErr
     } = userAuth({ storage, socket });
 
     const {
@@ -76,7 +81,12 @@ export default function AuthProvider({ children }) {
             confirmPurchases,
             setConfirmPurchases,
             qrCode,
-            res_purchases
+            res_purchases,
+            recoverPass,
+            data_Codig,
+            checking,
+            msgErr,
+            setMsgErr
         }}>
             {children}
 

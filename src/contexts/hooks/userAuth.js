@@ -9,6 +9,9 @@ export default function userAuth(EL) {
     const [auth, setAuth] = useState([]);
     const [isSignIn, setIsSignIn] = useState(false);
     const [isSignUp, setIsSignUp] = useState(false);
+    const [data_Codig, setData_Codig] = useState([]);
+    const [checking, setChecking] = useState(false);
+    const [msgErr, setMsgErr] = useState('');
 
     useEffect(() => {
         if (EL.storage.myToken) {
@@ -102,6 +105,45 @@ export default function userAuth(EL) {
         window.location.reload();
     };
 
+    function recoverPass(res) {
+        setChecking(true);
+        setMsgErr('');
+        api.post('/RecoverPassword', {
+            cod: res.cod,
+            codV: res.codV,
+            CPF: res.CPF,
+            status: res.status,
+            newPass: res.newPass,
+            id: res.id
+        }).then(res => {
+            setMsgErr({
+                err: false,
+                message: res.data.message
+            });
+            // console.log({
+            //     message: res.data.message,
+            //     status: res.data.response.status,
+            //     cod: res.data.response.cod,
+            //     email: res.data.response.email,
+            //     id: res.data.response.id,
+            // });
+            setChecking(false);
+            setData_Codig({
+                message: res.data.message,
+                status: res.data.response.status,
+                cod: res.data.response.cod,
+                email: res.data.response.email,
+                id: res.data.response.id,
+            })
+        }).catch((err) => {
+            setMsgErr({
+                err: true,
+                message: err.response.data.message
+            });
+            setChecking(false);
+        })
+    };
+
     return {
         myId,
         auth,
@@ -113,7 +155,12 @@ export default function userAuth(EL) {
         isSignIn,
         setIsSignIn,
         isSignUp,
-        setIsSignUp
+        setIsSignUp,
+        recoverPass,
+        data_Codig,
+        checking,
+        msgErr,
+        setMsgErr
     }
 
 }
