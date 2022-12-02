@@ -3,10 +3,10 @@ import { Container, AreaInfo } from './styles';
 import Fone from '../../Img/fone.jpg';
 import Rig from '../../Img/rig.jpg';
 import TRE from '../../Img/4091224332_1.webp';
-import AreaPubl from '../../components/AreaPubl';
+// import AreaPubl from '../../components/AreaPubl';
 import LineWinners from '../../components/LineWinners';
 
-export default function Winners({ width }) {
+export default function Winners({ width, widthMax }) {
   let pub = [
     {
       id: 0,
@@ -42,7 +42,7 @@ export default function Winners({ width }) {
             title={v.name}
             desc={v.desc}
             cota={v.cota}
-            width={width < 500 ? 90 : 39}
+            width={width < widthMax ? '82vw' : '550px'}
             height={63}
           />
         </span>

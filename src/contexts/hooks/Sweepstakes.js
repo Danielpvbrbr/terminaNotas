@@ -23,6 +23,7 @@ export default function Sweepstakes(El) {
                 );
                 setPurchasesFilter(filter);
             });
+            
             El.socket.on('res_purchases', (res) => {
                 if (res.CPF === El.auth.CPF) {
                     setRes_purchases(res);
@@ -40,11 +41,10 @@ export default function Sweepstakes(El) {
             });
         };
         getSweepstakes();
-    }, [El.auth.CPF, El.socket, confirmPurchases, qrCode.id_purchases]);
+    });
 
 
     async function sendPurchases(data) {
-
         await api.post('/AddPurchases', data,
             El.storage.config).then(res => {
                 if (res.status === 200) {
@@ -57,7 +57,7 @@ export default function Sweepstakes(El) {
                         status: value.status,
                         qtd: value.qtd,
                         price: value.price,
-                        priceUnd: value.priceUnd
+                        priceUnd: value.priceUnd,
                     })
                     setConfirmPurchases(true);
                     // window.location.reload();

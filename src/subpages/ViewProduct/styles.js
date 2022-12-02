@@ -11,7 +11,7 @@ export const Container = styled.div`
     }
 `;
 export const Area = styled.div`
-    width:${props => props.width}vw;
+    width:${props => props.width};
     background-color:#fff ;
     display:flex;
     align-items:center ;
@@ -27,7 +27,7 @@ export const Area = styled.div`
     
 `;
 export const BtnFinishing = styled.button`
-    width:${props => props.width}vw;
+    width:${props => props.width};
     height:40px ;
     background-color:#428651 ;
     color: #fff;
@@ -40,7 +40,7 @@ export const BtnFinishing = styled.button`
     cursor:pointer;
     box-shadow:  0px 1px 3px 1px #00A3FF;
     margin-bottom:6px;
- 
+
     span{
         width:50px ;
     }

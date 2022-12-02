@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { Container, Area, Info } from './styles';
 import { BsChevronRight, BsChevronDown, BsExclamationCircle, } from "react-icons/bs";
 
-export default function AreaSales({ key, data, width, privilege }) {
+export default function AreaSales({ key, data, width, privilege, widthMax }) {
   const [isOpen, setisOpen] = useState(false);
-
+console.log(width < widthMax ? '84vw' : '535px')
   return (
     <Container key={key}>
-      <Area width={width < 500 ? 90 : 40}>
+      <Area width={width < widthMax ? '84vw' : '535px'}>
         <img src={`data:image/jpeg;base64,${data.img}`} alt='imagem-compras' />
         {privilege ?
           <section>
@@ -38,7 +38,7 @@ export default function AreaSales({ key, data, width, privilege }) {
         }
       </Area>
       {isOpen &&
-        <Info width={width < 500 ? 90 : 40}>
+        <Info width={width < widthMax ? '84vw' : '535px'}>
           <section>
             <span> <BsExclamationCircle
               size={10}

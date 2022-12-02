@@ -123,6 +123,7 @@ export const DetailsPurchase = styled.div`
         overflow: hidden;
         text-overflow: ellipsis; 
         white-space: nowrap;
+        
       }
       
 `;

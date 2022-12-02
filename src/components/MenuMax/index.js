@@ -7,13 +7,16 @@ import { BsJustify } from "react-icons/bs";
 
 export default function Menu({
     width,
+    widthMax,
     isMenu,
     setRoute,
     route,
     setIsMenu,
     AuthContext,
     setDataRouter,
-    setActive
+    setActive,
+    setIsForm,
+
 }) {
     const { auth, signed } = useContext(AuthContext);
 
@@ -24,8 +27,8 @@ export default function Menu({
     };
 
     return (
-        <Container width={width < 500 ? 95 : 42}>
-            {width < 500 ?
+        <Container width={width < widthMax ? '90vw' : '560px'}>
+            {width < widthMax ?
                 <div>
                     <BsJustify color="#fff" size={28} onClick={() => setIsMenu(!isMenu)} />
                     <h3>Rodo<span>Vale</span></h3>
@@ -46,6 +49,19 @@ export default function Menu({
                     }
                     <li onClick={() => setRoute('/Doubt')} style={{ color: route === '/Doubt' ? '#00A3FF' : '#fff' }}>Dúvida</li>
                     <li onClick={() => setRoute('/MyAccount')} style={{ color: route === '/MyAccount' ? '#00A3FF' : '#fff' }}>Minha conta</li>
+                    
+                    {!signed &&
+                        <li onClick={() => setIsForm(true)} style={{
+                            color: '#fff',
+                            background: '#00A3FF',
+                            border: '1px solid #00A3FF',
+                            borderRadius: '3px',
+                            padding: '4px',
+                            fontWeight: 300
+
+                        }}>Acessar</li>
+                    }
+
                 </ul>
             }
         </Container>

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Container, AreaInfo } from './styles';
 import { BsChevronRight, BsCheck2Square } from "react-icons/bs";
 
-export default function AreaSubPubl({ setActive, data, setDataRouter, setRoute, width, AuthContext }) {
+export default function AreaSubPubl({ setActive, data, setDataRouter, setRoute, width, AuthContext, widthMax }) {
   const { auth, signed } = useContext(AuthContext);
 
   const handleSubmit = (res) => {
@@ -30,7 +30,7 @@ export default function AreaSubPubl({ setActive, data, setDataRouter, setRoute, 
   };
 
   return (
-    <Container width={width < 500 ? 90 : 40} >
+    <Container width={width < widthMax ? '82vw' : '550px'} >
       <img src={`data:image/jpeg;base64,${data.img}`} alt='imgCentral' />
 
       <AreaInfo>

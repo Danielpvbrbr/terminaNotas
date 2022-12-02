@@ -3,16 +3,16 @@ import { Container, TextArea, AreaSocial } from './styles';
 import { BsWhatsapp, BsEnvelopeFill } from "react-icons/bs";
 import { FaTelegramPlane } from 'react-icons/fa';
 
-export default function ContactUs({ width }) {
+export default function ContactUs({ width, widthMax }) {
   return (
     <Container>
       <h4>Fale Conosco</h4>
       <TextArea
-        width={width < 500 ? 90 : 39}
+        width={width < widthMax ? '82vw' : '550px'}
         placeholder='Digite sua mensagem...'
       />
 
-      <AreaSocial width={width < 500 ? 90 : 39}>
+      <AreaSocial width={width < widthMax ? '82vw' : '550px'}>
         <button>Enviar</button>
         ou
         <span>

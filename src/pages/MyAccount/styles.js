@@ -12,7 +12,7 @@ export const Container = styled.div`
 `;
 
 export const LineOption = styled.div`
-    width:${props=>props.width}vw;
+    width:${props=>props.width};
     height:30px ;
     display:flex ;
     flex-direction:row ;

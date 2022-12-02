@@ -3,8 +3,8 @@ import { Container } from './styles';
 
 import AreaSales from '../../components/AreaSales';
 
-export default function MyShopping({ width, AuthContext }) {
-  const { auth,purchasesFilter } = useContext(AuthContext);
+export default function MyShopping({ width, widthMax, AuthContext }) {
+  const { auth, purchasesFilter } = useContext(AuthContext);
 
   return (
     <Container>
@@ -15,6 +15,7 @@ export default function MyShopping({ width, AuthContext }) {
           key={i}
           data={v}
           width={width}
+          widthMax={widthMax}
           privilege={auth.privilege}
         />
       )}

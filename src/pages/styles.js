@@ -6,12 +6,13 @@ export const Container = styled.div`
 `;
 
 export const AreaMenu = styled.section`
-    width:100vw;
+    width:${props => props.width};
     height:10vh ;
     background-color:#343A40;
 `;
 export const AreaInfo = styled.section`
-    width:100vw;
+    width:${props => props.width}vw;
+    /* min-width:900px; */
     display:flex ;
     flex-direction:row ;
     justify-content:space-around ;
@@ -19,10 +20,9 @@ export const AreaInfo = styled.section`
     top:-30px ;
 `;
 export const AreaBody = styled.section`
-    width:${props=>props.width}vw;
+    max-width:${props => props.width};
     background-color:#CED4DA;
     border-radius:10px ;
-
 `;
 
 export const Info = styled.section`

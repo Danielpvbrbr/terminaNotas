@@ -22,14 +22,14 @@ export const Container = styled.div`
 `;
 
 export const AreaForm = styled.div`
-    width:${props => props.width}vw;
+    width:${props => props.width};
     height:39vh ;
     background-color: #fff;
     border-radius:5px;
  
     header{
         width:${props => props.width}vw;
-        height:40px ;
+        height:37px ;
         display:flex ;
         justify-content:space-between ;
         align-items:center ;
@@ -58,10 +58,10 @@ export const AreaButton = styled.div`
         flex-direction:column ;
         justify-content:space-between ;
         align-items:center ;
-        margin-top:25px ;
+        margin-top:10px ;
     
      button{
-        width:${props => props.width}vw;
+        width:${props => props.width};
         height:40px ;
         background-color:#00A3FF ;
         border:none ;
@@ -72,7 +72,7 @@ export const AreaButton = styled.div`
     h3{
         font-weight:500 ;
         color: #779FE5;
-        font-size:11pt ;
+        font-size:10pt ;
         margin-top:5px ;
         cursor: pointer;
     }

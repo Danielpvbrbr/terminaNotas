@@ -7,9 +7,9 @@ import getQuota from '../../services/getQuota';
 import cvrtArray from '../../services/cvrtArray';
 import CvrtReal from '../../services/CvrtReal';
 
-export default function ViewProduct({ dataRouter, width, AuthContext }) {
+export default function ViewProduct({ dataRouter, width, AuthContext, widthMax }) {
   const { auth, signed, sendPurchases, setIsSignIn, purchases } = useContext(AuthContext);
-  const [btnValue, setbtnValue] = useState(1);
+  const [btnValue, setbtnValue] = useState(5);
 
   const Purchases = () => {
     const filter = purchases.filter(person =>
@@ -25,6 +25,7 @@ export default function ViewProduct({ dataRouter, width, AuthContext }) {
         price: total,
         priceUnd: dataRouter.price,
         CPF: auth.CPF,
+        email: auth.email,
         phone: auth.phone,
         buyer: auth.name,
         img: dataRouter.img,
@@ -38,15 +39,15 @@ export default function ViewProduct({ dataRouter, width, AuthContext }) {
   return (
     <Container>
       <h4>Produto</h4>
-      <ProdutoView dataRouter={dataRouter} width={width} />
+      <ProdutoView dataRouter={dataRouter} width={width < widthMax ? '87vw' : '550px'} widthMax={widthMax}/>
       {dataRouter.status === 'Active' &&
-        <Area width={width < 500 ? 90 : 40}>
+        <Area width={width < widthMax ? '87vw' : '550px'}>
           <h3>Selecione a quantidade de números</h3>
           <AreaAdd
             btnValue={btnValue}
             setbtnValue={setbtnValue}
-            width={width < 500 ? 85 : 38}
-            height={width < 500 ? 150 : 100}
+            width={width < widthMax ? '84vw' : '538px'}
+            height={width < widthMax ? 150 : 100}
           />
 
           <InputNumber
@@ -54,7 +55,7 @@ export default function ViewProduct({ dataRouter, width, AuthContext }) {
             setbtnValue={setbtnValue}
           />
           {!(auth.privilege) &&
-            <BtnFinishing width={width < 500 ? 85 : 38} onClick={Purchases}>
+            <BtnFinishing width={width < widthMax ? '84vw' : '535px'} onClick={Purchases}>
               <span />
               <h2>Finalizar</h2>
               <p>{CvrtReal(dataRouter, btnValue)}</p>

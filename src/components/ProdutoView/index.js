@@ -2,10 +2,10 @@ import React from 'react';
 import { Container, AreaInfo } from './styles';
 import ConvertReal from '../ConvertReal';
 
-export default function ProdutoView({ dataRouter, width }) {
+export default function ProdutoView({ dataRouter, width, widthMax }) {
 
   return (
-    <Container width={width < 500 ? 90 : 40}>
+    <Container width={width}>
       <img src={`data:image/jpeg;base64,${dataRouter.img}`} alt='imgView' />
       <div>
         <h4>{dataRouter.title}</h4>

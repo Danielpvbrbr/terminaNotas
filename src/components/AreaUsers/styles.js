@@ -6,7 +6,7 @@ export const Container = styled.div`
    margin-bottom:5px ;
 `;
 export const Area = styled.section`
-    width:${props=>props.width}vw;
+    width:${props=>props.width};
     height:40px ;
     display:flex ;
     flex-direction:row ;
@@ -28,14 +28,14 @@ export const Area = styled.section`
  
 `;
 export const Info = styled.section`
-    width:${props=>props.width}vw;
+    width:${props=>props.width};
     display:flex ;
     justify-content:space-evenly;
     flex-direction:column ;
     padding:3px ;
 
     section{
-        width:${props=>props.width}vw;
+        width:${props=>props.width};
         display:flex ;
         flex-direction:row ;
         justify-content:center;

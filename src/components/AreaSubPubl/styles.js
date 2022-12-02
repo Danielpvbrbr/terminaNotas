@@ -13,7 +13,7 @@ const rotate = keyframes`
 `;
 
 export const Container = styled.div`
-    width:${props=>props.width}vw;
+    width:${props=>props.width};
     height:110px ;
     background-color: #fff;
     margin-top:5px ;

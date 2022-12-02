@@ -3,7 +3,7 @@ import {
   Container,
 } from "./styles";
 
-export default function App({
+export default function SelectLabel({
   name,
   label,
   type,
@@ -19,13 +19,13 @@ export default function App({
   disabled,
   color,
   readOnly,
-
+  data
 }) {
 
   return (
     <Container
       width={width}
-      width2={isIcon ? width2 : `${Number(width2.replace(/[^\d]+/g, '')) + 40}px`}
+      width2={width2}
       background={background}
       color={color}
       isIcon={isIcon}>
@@ -38,17 +38,13 @@ export default function App({
             cursor='pointer'
           />
         }
-
-        <input
-          type={type}
-          onChange={onChange}
-          disabled={disabled}
-          value={value}
-          placeholder={placeholder}
-          maxLength={maxLength}
-          name={name}
-          readOnly={readOnly}
-        />
+        <select onChange={onChange} id="option" defaultValue={value} disabled={disabled}>
+          {
+            data.map((v, i) =>
+              <option value={v} key={i}>{v}</option>
+            )
+          }
+        </select>
       </span>
     </Container>
   )

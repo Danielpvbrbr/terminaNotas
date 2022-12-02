@@ -5,7 +5,7 @@ import InputLabel from '../../components/InputLabel';
 import RecoverPassword from './RecoverPassword';
 import { BsFillTelephoneFill, BsLockFill } from "react-icons/bs";
 
-export default function SignIn({ setIsForm, width, setIsSignUp, AuthContext }) {
+export default function SignIn({ setIsForm, width, widthMax, setIsSignUp, AuthContext }) {
   const { signIn } = useContext(AuthContext);
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
@@ -27,7 +27,6 @@ export default function SignIn({ setIsForm, width, setIsSignUp, AuthContext }) {
     setIsForm(false);
   };
 
-
   return (
     <>
       {
@@ -40,7 +39,7 @@ export default function SignIn({ setIsForm, width, setIsSignUp, AuthContext }) {
           />
           :
           <Container>
-            <AreaForm width={width < 500 ? 80 : 30}>
+            <AreaForm width={width < widthMax ? '62vw' : '400px'}>
               <header>
                 <h4>Login</h4>
                 <BsX
@@ -55,24 +54,24 @@ export default function SignIn({ setIsForm, width, setIsSignUp, AuthContext }) {
                   type='number'
                   label='Telefone:'
                   value={phone}
-                  Icon={BsFillTelephoneFill}
-                  width={width < 500 ? 70 : 27}
-                  width2={width}//Modifica o tamanho do input
-                  placeholder='Ex: 999999999'
                   maxLength={11}
+                  Icon={BsFillTelephoneFill}
+                  width={width < widthMax ? '56vw' : '370px'}
+                  width2={width < widthMax ? '50vw' : '330px'}//Modifica o tamanho do input
+                  placeholder='Ex: 999999999'
                   onChange={e => setPhone(e.target.value)}
                   background='#fff'
                   isIcon={true}
                 />
-
                 <InputLabel
                   type='password'
                   label='Senha:'
                   value={password}
                   maxLength={8}
                   Icon={BsLockFill}
-                  width={width < 500 ? 70 : 27}
-                  width2={width}//Modifica o tamanho do input
+                  width={width < widthMax ? '56vw' : '370px'}
+                  width2={width < widthMax ? '50vw' : '330px'}//Modifica o tamanho do input
+                  widthMax={widthMax}
                   placeholder='Digite sua senha'
                   onChange={e => setPassword(e.target.value)}
                   background='#fff'
@@ -82,7 +81,7 @@ export default function SignIn({ setIsForm, width, setIsSignUp, AuthContext }) {
 
               <p onClick={() => setisRecovery(true)}>Esqueci a senha!</p>
 
-              <AreaButton width={width < 500 ? 70 : 27}>
+              <AreaButton width={width < widthMax ? '56vw' : '370px'}>
                 <button onClick={handleSubmit}>Continuar</button>
                 <h3 onClick={isAlter}>Criar conta</h3>
               </AreaButton>

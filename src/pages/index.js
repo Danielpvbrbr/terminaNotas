@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
     Container,
     AreaMenu,
@@ -28,6 +28,8 @@ import MyShopping from '../subpages/MyShopping';
 import MyData from '../subpages/MyData';
 
 export default function App() {
+    window.onresize = start;
+    var width_ = window.screen.width;
     const {
         signed,
         isSignIn,
@@ -40,7 +42,14 @@ export default function App() {
     const [active, setActive] = useState('Active'); //Sweepstakes
     const [isMenu, setIsMenu] = useState(false);
     const [dataRouter, setDataRouter] = useState([]);
-    var width = window.screen.width;
+    const [width, setWidth] = useState('' || width_);
+    const widthMax = 701;
+    console.log(widthMax)
+
+    function start() {
+        setWidth(document.documentElement.clientWidth);
+        console.log(width)
+    };
 
     const RotaActive = () => {
         // eslint-disable-next-line default-case
@@ -50,12 +59,14 @@ export default function App() {
                     setDataRouter={setDataRouter}
                     setRoute={setRoute}
                     width={width}
+                    widthMax={widthMax}
                     AuthContext={AuthContext}
                     setActive={setActive}
                 />
             case '/Sweepstakes':
                 return <Sweepstakes
                     width={width}
+                    widthMax={widthMax}
                     AuthContext={AuthContext}
                     setRoute={setRoute}
                     active={active}
@@ -66,27 +77,32 @@ export default function App() {
             case '/Winners':
                 return <Winners
                     width={width}
+                    widthMax={widthMax}
                     AuthContext={AuthContext}
                 />
             case '/ContactUs':
                 return <ContactUs
                     width={width}
+                    widthMax={widthMax}
                     AuthContext={AuthContext}
                 />
             case '/Sales':
                 return <Sales
                     width={width}
+                    widthMax={widthMax}
                     AuthContext={AuthContext}
                 />
             case '/UserList':
                 return <UserList
                     width={width}
+                    widthMax={widthMax}
                     AuthContext={AuthContext}
                 />
             case '/MyAccount':
                 return <MyAccount
                     setRoute={setRoute}
                     width={width}
+                    widthMax={widthMax}
                     signed={signed}
                     setIsForm={setIsSignIn}
                     AuthContext={AuthContext}
@@ -94,24 +110,28 @@ export default function App() {
             case '/Doubt':
                 return <Doubt
                     width={width}
+                    widthMax={widthMax}
                     AuthContext={AuthContext}
                 />
             case '/ViewProduct':
                 return <ViewProduct
                     dataRouter={dataRouter}
                     width={width}
+                    widthMax={widthMax}
                     AuthContext={AuthContext}
                 />
             case '/MyShopping':
                 return <MyShopping
                     setRoute={setRoute}
                     width={width}
+                    widthMax={widthMax}
                     AuthContext={AuthContext}
                 />
             case '/MyData':
                 return <MyData
                     setRoute={setRoute}
                     width={width}
+                    widthMax={widthMax}
                     AuthContext={AuthContext}
                 />
         }
@@ -123,6 +143,7 @@ export default function App() {
                 <SignIn
                     setIsForm={setIsSignIn}
                     width={width}
+                    widthMax={widthMax}
                     setIsSignUp={setIsSignUp}
                     AuthContext={AuthContext}
                 />
@@ -131,6 +152,7 @@ export default function App() {
                 <SignUp
                     setIsForm={setIsSignIn}
                     width={width}
+                    widthMax={widthMax}
                     setIsSignUp={setIsSignUp}
                     AuthContext={AuthContext}
                 />
@@ -143,7 +165,8 @@ export default function App() {
                     setDataRouter={setDataRouter}
                     route={route}
                     signed={signed}
-                    width={width < 500 ? 60 : 42}
+                    width={width < widthMax ? 60 : 42}
+                    widthMax={widthMax}
                     AuthContext={AuthContext}
                     setActive={setActive}
                 />
@@ -151,17 +174,19 @@ export default function App() {
             {confirmPurchases &&
                 <ConfirmPurchase
                     width={width}
+                    widthMax={widthMax}
                     AuthContext={AuthContext}
                 />
             }
-            <AreaMenu />
+            <AreaMenu  width={width < widthMax ? '100vw' : '100vw'}/>
             <AreaInfo>
-                {width > 500 &&
+                {width > 950 &&
                     <AreaWinners />
                 }
-                <AreaBody width={width < 500 ? 95 : 42}>
+                <AreaBody width={width < widthMax ? '92vw' : '570px'}>
                     <MenuMax
                         width={width}
+                        widthMax={widthMax}
                         signed={signed}
                         isMenu={isMenu}
                         setRoute={setRoute}
@@ -170,13 +195,14 @@ export default function App() {
                         AuthContext={AuthContext}
                         setDataRouter={setDataRouter}
                         setActive={setActive}
+                        setIsForm={setIsSignIn}
                     />
                     <Info>
                         {RotaActive()}
                     </Info>
                 </AreaBody>
 
-                {width > 500 &&
+                {width > 950 &&
                     <AreaDoubt
                         setIsForm={setIsSignIn}
                         signed={signed}

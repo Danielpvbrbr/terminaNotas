@@ -13,7 +13,7 @@ export const Container = styled.div`
 
 
 export const AreaOption = styled.section`
-    width:${props=>props.width}vw;
+    width:${props=>props.width};
     height:63px ;
     margin-top:5px ;
     background-color:#fff;

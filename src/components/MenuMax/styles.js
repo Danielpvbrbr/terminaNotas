@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-    width:${props=>props.width}vw;
+    width:${props=>props.width};
     position:relative ;
     top:-30px ;
 

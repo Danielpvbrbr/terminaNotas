@@ -1,5 +1,13 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+const animated = keyframes`
+   from {
+    opacity:0;
+  }
 
+  to {
+     opacity:1;
+  }
+`;
 export const Container = styled.div`
    display:flex ;
    justify-content:center ;
@@ -7,8 +15,22 @@ export const Container = styled.div`
    border-radius:5px ;
    margin-bottom:2px ;
 `;
+export const Alert = styled.div`
+   display:flex ;
+   justify-content:center ;
+   align-items:center ;
+   border-radius:5px ;
+   margin-bottom:2px ;
+   background-color: #32CD32;
+   height:45px ;
+   
+   p{
+    color:#fff ;
+   }
+`;
+
 export const Info = styled.section`
-    width:${props=>props.width}vw;
+    width:${props => props.width}vw;
     background-color:#fff ;
     display:flex ;
     justify-content:space-evenly;
@@ -18,7 +40,7 @@ export const Info = styled.section`
     margin-top:20px ;
 
     section{
-        width:${props=>props.width}vw;
+        width:${props => props.width}vw;
         display:flex ;
         flex-direction:row ;
         justify-content:center;
@@ -53,5 +75,21 @@ export const Info = styled.section`
         margin:2px ;
         font-weight:300 ;
     }
-    
+`;
+export const Button = styled.button`
+        width:${props => props.width}vw;
+        background-color:${props => props.bgColor};
+        animation:${animated} 0.5s linear ;
+        color:#fff ;
+        display:flex ;
+        flex-direction:row ;
+        justify-content:center;
+        align-items:center ;
+        font-size:10pt ;
+        margin:2px ;
+        height:35px ;
+        font-weight:400 ;
+        outline: none;
+        border:none ;
+        cursor: pointer;
 `;

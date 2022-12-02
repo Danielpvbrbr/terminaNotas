@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-    width:${props => props.width};
+    width:${props => props.width}vw ;
     height:65px ;
     display:flex ;
     flex-direction:column ;
@@ -22,15 +22,15 @@ export const Container = styled.div`
         border-radius: 5px;
         background-color: ${props => props.background};
     }
-    span input{
-        width:${props => props.width2};
+    span select{
+        width:${props => props.isIcon ? (props.width2 < 500 ? (props.width - 10) : (props.width - 3.5)) : (props.width - 1)}vw ;
         height:40px ;
         padding-left:2pt ;
         background-color: ${props => props.background};
         color: ${props => props.color};
         border:0 ;
         font-size:12pt ;
-        border-left:1px solid #B7B7B7;
+
     }
     
 `;

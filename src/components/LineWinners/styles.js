@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Container = styled.section`
-    width:${props => props.width}vw;
+    width:${props => props.width};
     height:${props => props.height}px ;
     margin-top:5px ;
     background-color:#fff;

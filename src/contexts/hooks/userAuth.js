@@ -7,6 +7,7 @@ export default function userAuth(EL) {
     const [leading, setLoading] = useState(true);
     const [myId, setMyId] = useState(null);
     const [auth, setAuth] = useState([]);
+    const [fullUser, setFullUser] = useState([]);
     const [isSignIn, setIsSignIn] = useState(false);
     const [isSignUp, setIsSignUp] = useState(false);
     const [data_Codig, setData_Codig] = useState([]);
@@ -28,6 +29,7 @@ export default function userAuth(EL) {
     useEffect(() => {
         async function Auth() {
             if (!leading) {
+                EL.socket.emit('fullUser', myId);
                 await api.post('/auth', { id: myId })
                     .then(res => {
                         setAuth(res.data);
@@ -38,10 +40,15 @@ export default function userAuth(EL) {
                             // signOut();
                         };
                     });
+
+                await EL.socket.on('fullUser', (data) => {
+                    setFullUser(data.response);
+                });
             };
         };
         Auth();
-    }, [myId, leading]);
+    }, [myId, leading, EL.socket, auth.CPF]);
+
 
     async function signIn(data) {
         await api.post('/signIn', {
@@ -97,12 +104,24 @@ export default function userAuth(EL) {
         })
     };
 
-    function signOut() {
-        localStorage.clear();
-        setAuthenticated(false);
-        api.defaults.headers.common['x-access-token'] = undefined;
-        api.post('/logout');
-        window.location.reload();
+    async function updUsersAddres(data) {
+        setChecking(true);
+        await api.post('/updUsersAddres', data)
+            .then(res => {
+                setChecking(false);
+                if (res.status === 200) {
+                    console.log(res)
+                    setMsgErr({
+                        err: false,
+                        message: res.data.message
+                    });
+                } else {
+                    setMsgErr({
+                        err: true,
+                        message: res.data.message
+                    });
+                }
+            })
     };
 
     function recoverPass(res) {
@@ -120,13 +139,6 @@ export default function userAuth(EL) {
                 err: false,
                 message: res.data.message
             });
-            // console.log({
-            //     message: res.data.message,
-            //     status: res.data.response.status,
-            //     cod: res.data.response.cod,
-            //     email: res.data.response.email,
-            //     id: res.data.response.id,
-            // });
             setChecking(false);
             setData_Codig({
                 message: res.data.message,
@@ -142,6 +154,14 @@ export default function userAuth(EL) {
             });
             setChecking(false);
         })
+    };
+
+    async function signOut() {
+        localStorage.clear();
+        setAuthenticated(false);
+        api.defaults.headers.common['x-access-token'] = undefined;
+        api.post('/logout');
+        window.location.reload();
     };
 
     return {
@@ -160,7 +180,9 @@ export default function userAuth(EL) {
         data_Codig,
         checking,
         msgErr,
-        setMsgErr
+        setMsgErr,
+        fullUser,
+        updUsersAddres
     }
 
 }

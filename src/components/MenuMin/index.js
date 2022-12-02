@@ -29,6 +29,7 @@ export default function MenuMin({
     setDataRouter([]);
     setRoute('/Sweepstakes');
     setActive('Active');
+    setIsMenu(false);
   };
 
   return (
@@ -38,7 +39,7 @@ export default function MenuMin({
         <ul>
           <li onClick={() => handleSend('/Home')} style={{ color: route === '/Home' ? '#00A3FF' : '#fff' }}>Inicio</li>
           <li onClick={clear} style={{ color: route === '/Sweepstakes' ? '#00A3FF' : '#fff' }}>Sorteios</li>
-          {signed ?
+          {signed && auth.privilege ?
             <>
               <li onClick={() => handleSend('/Sales')} style={{ color: route === '/Sales' ? '#00A3FF' : '#fff' }}>Vendas</li>
               <li onClick={() => handleSend('/UserList')} style={{ color: route === '/UserList' ? '#00A3FF' : '#fff' }}>Lista de usuário</li>
@@ -50,8 +51,10 @@ export default function MenuMin({
             </>
           }
           <li onClick={() => handleSend('/MyAccount')} style={{ color: route === '/MyAccount' ? '#00A3FF' : '#fff' }}>Minha conta</li>
-          <li onClick={() => setRoute('/Doubt')} style={{ color: route === '/Doubt' ? '#00A3FF' : '#fff' }}>Dúvida</li>
-          {signed ?
+          <li onClick={() => handleSend('/Doubt')} style={{ color: route === '/Doubt' ? '#00A3FF' : '#fff' }}>Dúvida</li>
+          
+        </ul>
+        {signed ?
             <div>
               <p>{auth && auth.name}</p>
               <BsBoxArrowRight color="#B7B7B7" cursor='pointer' onClick={signOut} />
@@ -59,7 +62,6 @@ export default function MenuMin({
             :
             <button onClick={() => handleAction(true)}>Acessar</button>
           }
-        </ul>
       </AreaForm>
     </Container>
   )

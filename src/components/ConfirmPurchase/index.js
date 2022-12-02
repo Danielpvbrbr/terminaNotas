@@ -5,7 +5,7 @@ import InputLabel from '../InputLabel';
 import { BsFiles, BsLockFill } from "react-icons/bs";
 import ConvertReal from '../../components/ConvertReal';
 
-export default function ConfirmPurchase({ width, AuthContext }) {
+export default function ConfirmPurchase({ width, widthMax, AuthContext }) {
   const { qrCode, setConfirmPurchases, res_purchases } = useContext(AuthContext);
 
 
@@ -29,7 +29,7 @@ export default function ConfirmPurchase({ width, AuthContext }) {
 
   return (
     <Container>
-      <AreaForm width={width < 500 ? 80 : 30}>
+      <AreaForm width={width < widthMax ? 80 : 30}>
         <header>
           <h4>Confirma sua compra</h4>
           <BsX
@@ -40,7 +40,7 @@ export default function ConfirmPurchase({ width, AuthContext }) {
           />
         </header>
 
-        <Info width={width < 500 ? 80 : 28}>
+        <Info width={width < widthMax ? 80 : 28}>
           <h3>Pague {qrCode && ConvertReal(qrCode.price)} via Pix</h3>
           <h4>Para pagar, escolha uma destas opções:</h4>
         </Info>
@@ -57,7 +57,7 @@ export default function ConfirmPurchase({ width, AuthContext }) {
               value={qrCode && qrCode.qr_code}
               maxLength={8}
               Icon={BsLockFill}
-              width={width < 500 ? 70 : 24}
+              width={width < widthMax ? 70 : 24}
               width2={width}//Modifica o tamanho do input
               background='#fff'
               isIcon={false}
@@ -71,20 +71,20 @@ export default function ConfirmPurchase({ width, AuthContext }) {
             />
           </span>
         </section>
-        <Details width={width < 500 ? 80 : 28}>
+        <Details width={width < widthMax ? 80 : 28}>
           <h2>Como pagar?</h2>
           <p><b>1°</b> Entre no app ou site do seu banco e escolha a opção de pagamento via Pix.  </p>
           <p><b>2°</b> Escaneie o código QR ou copie e cole o código de pagamento.</p>
           <h4>Pronto! O pagamento será creditado na hora e você receberá um e-mail de confirmação.</h4>
         </Details>
-        <DetailsPurchase width={width < 500 ? 80 : 28}>
+        <DetailsPurchase width={width < widthMax ? 80 : 28}>
           <h2>Detalhes da sua compra:</h2>
           <p><b>Produto:</b>  {qrCode.description}</p>
           <p><b>Preço:</b>  {ConvertReal(qrCode.priceUnd)}</p>
           <p><b>Quantidade:</b> {qrCode.qtd}</p>
           <p><b>Total:</b> {ConvertReal(qrCode.price)}</p>
         </DetailsPurchase>
-        <AreaButton width={width < 500 ? 70 : 28} color={res_purchases.status === 'approved' ? '#32CD32' : '#00A3FF'}>
+        <AreaButton width={width < widthMax ? 70 : 28} color={res_purchases.status === 'approved' ? '#32CD32' : '#00A3FF'}>
           <button disabled>{res_purchases.status === 'approved' ? 'Aprovado' : 'Pendente'}</button>
         </AreaButton>
       </AreaForm>

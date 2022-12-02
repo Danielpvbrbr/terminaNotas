@@ -5,7 +5,7 @@ import InputLabel from '../../components/InputLabel';
 import { BsFillTelephoneFill, } from "react-icons/bs";
 import axios from 'axios';
 
-export default function SignUp({ width, setIsSignUp, AuthContext }) {
+export default function SignUp({ width, widthMax, setIsSignUp, AuthContext }) {
   const { signUp } = useContext(AuthContext);
   const [isNxt, setIsNxt] = useState(true);
   const [name, setName] = useState('');
@@ -49,11 +49,13 @@ export default function SignUp({ width, setIsSignUp, AuthContext }) {
 
   if (CEP.length === 8) {
     async function get() {
-      const response = ''
-      setNeighborhood(response.data.bairro);
-      setCity(response.data.localidade);
-      setLogradouro(response.data.logradouro);
-      setUF(response.data.uf);
+      axios.get(`https://viacep.com.br/ws/${CEP}/json/`)
+        .then(res => {
+          setNeighborhood(res.data.bairro);
+          setCity(res.data.localidade);
+          setLogradouro(res.data.logradouro);
+          setUF(res.data.uf);
+        });
     };
     get();
   };
@@ -72,7 +74,7 @@ export default function SignUp({ width, setIsSignUp, AuthContext }) {
 
   return (
     <Container>
-      <AreaForm width={width < 500 ? 80 : 30}>
+      <AreaForm width={width < widthMax ? 80 : 30}>
         <header>
           <h4>Cadastro</h4>
           <BsX
@@ -90,7 +92,7 @@ export default function SignUp({ width, setIsSignUp, AuthContext }) {
               name={'name'}
               value={name}
               Icon={BsFillTelephoneFill}
-              width={width < 500 ? 70 : 27}
+              width={width < widthMax ? 70 : 27}
               width2={width}//Modifica o tamanho do input
               placeholder='Digite seu nome!'
               onChange={e => setName(e.target.value)}
@@ -104,7 +106,7 @@ export default function SignUp({ width, setIsSignUp, AuthContext }) {
               name={'name'}
               value={CPF}
               Icon={BsFillTelephoneFill}
-              width={width < 500 ? 70 : 27}
+              width={width < widthMax ? 70 : 27}
               width2={width}//Modifica o tamanho do input
               placeholder='Digite o seu CPF '
               onChange={e => setCPF(e.target.value)}
@@ -118,7 +120,7 @@ export default function SignUp({ width, setIsSignUp, AuthContext }) {
               name={'name'}
               value={email}
               Icon={BsFillTelephoneFill}
-              width={width < 500 ? 70 : 27}
+              width={width < widthMax ? 70 : 27}
               width2={width}//Modifica o tamanho do input
               placeholder='exemplo@exemplo.com'
               onChange={e => setEmail(e.target.value)}
@@ -132,7 +134,7 @@ export default function SignUp({ width, setIsSignUp, AuthContext }) {
               name={'name'}
               value={password}
               Icon={BsFillTelephoneFill}
-              width={width < 500 ? 70 : 27}
+              width={width < widthMax ? 70 : 27}
               width2={width}//Modifica o tamanho do input
               placeholder='Digite sua senha'
               maxLength={8}
@@ -146,7 +148,7 @@ export default function SignUp({ width, setIsSignUp, AuthContext }) {
               name={'name'}
               value={isPassword}
               Icon={BsFillTelephoneFill}
-              width={width < 500 ? 70 : 27}
+              width={width < widthMax ? 70 : 27}
               width2={width}//Modifica o tamanho do input
               placeholder='Confirme a senha'
               onChange={e => setIsPassword(e.target.value)}
@@ -160,7 +162,7 @@ export default function SignUp({ width, setIsSignUp, AuthContext }) {
               name={'name'}
               value={phone}
               Icon={BsFillTelephoneFill}
-              width={width < 500 ? 70 : 27}
+              width={width < widthMax ? 70 : 27}
               width2={width}//Modifica o tamanho do input
               placeholder='Digite seu telefone'
               onChange={e => setPhone(e.target.value)}
@@ -177,7 +179,7 @@ export default function SignUp({ width, setIsSignUp, AuthContext }) {
               name={'name'}
               value={CEP}
               Icon={BsFillTelephoneFill}
-              width={width < 500 ? 70 : 27}
+              width={width < widthMax ? 70 : 27}
               width2={width}//Modifica o tamanho do input
               placeholder='Digite seu CEP..'
               onChange={e => setCEP(e.target.value)}
@@ -191,7 +193,7 @@ export default function SignUp({ width, setIsSignUp, AuthContext }) {
               name={'name'}
               value={logradouro}
               Icon={BsFillTelephoneFill}
-              width={width < 500 ? 70 : 27}
+              width={width < widthMax ? 70 : 27}
               width2={width}//Modifica o tamanho do input
               placeholder='Digite o Logradouro..'
               onChange={e => setLogradouro(e.target.value)}
@@ -205,7 +207,7 @@ export default function SignUp({ width, setIsSignUp, AuthContext }) {
               name={'name'}
               value={number}
               Icon={BsFillTelephoneFill}
-              width={width < 500 ? 70 : 27}
+              width={width < widthMax ? 70 : 27}
               width2={width}//Modifica o tamanho do input
               placeholder='Digite o numero...'
               onChange={e => setNumber(e.target.value)}
@@ -219,7 +221,7 @@ export default function SignUp({ width, setIsSignUp, AuthContext }) {
               name={'name'}
               value={neighborhood}
               Icon={BsFillTelephoneFill}
-              width={width < 500 ? 70 : 27}
+              width={width < widthMax ? 70 : 27}
               width2={width}//Modifica o tamanho do input
               placeholder='Digite o bairro...'
               onChange={e => setNeighborhood(e.target.value)}
@@ -233,7 +235,7 @@ export default function SignUp({ width, setIsSignUp, AuthContext }) {
               name={'name'}
               value={complement}
               Icon={BsFillTelephoneFill}
-              width={width < 500 ? 70 : 27}
+              width={width < widthMax ? 70 : 27}
               width2={width}//Modifica o tamanho do input
               placeholder='Exemplo: casa 2'
               onChange={e => setComplement(e.target.value)}
@@ -247,7 +249,7 @@ export default function SignUp({ width, setIsSignUp, AuthContext }) {
               name={'name'}
               value={uf}
               Icon={BsFillTelephoneFill}
-              width={width < 500 ? 70 : 27}
+              width={width < widthMax ? 70 : 27}
               width2={width}//Modifica o tamanho do input
               placeholder='UF...'
               onChange={e => setUF(e.target.value)}
@@ -261,7 +263,7 @@ export default function SignUp({ width, setIsSignUp, AuthContext }) {
               name={'name'}
               value={city}
               Icon={BsFillTelephoneFill}
-              width={width < 500 ? 70 : 27}
+              width={width < widthMax ? 70 : 27}
               width2={width}//Modifica o tamanho do input
               placeholder='Digite o nome da cidade...'
               onChange={e => setCity(e.target.value)}
@@ -275,7 +277,7 @@ export default function SignUp({ width, setIsSignUp, AuthContext }) {
               name={'name'}
               value={reference}
               Icon={BsFillTelephoneFill}
-              width={width < 500 ? 70 : 27}
+              width={width < widthMax ? 70 : 27}
               width2={width}//Modifica o tamanho do input
               placeholder='Examplo: Perto de uma arvore...'
               onChange={e => setReference(e.target.value)}
@@ -288,7 +290,7 @@ export default function SignUp({ width, setIsSignUp, AuthContext }) {
         <AreaButton >
           {isNxt ?
             <Btn
-              width={width < 500 ? 70 : 27}
+              width={width < widthMax ? 70 : 27}
               onClick={() => next(false)}
               background='#00A3FF'
               color='#fff'
@@ -296,13 +298,13 @@ export default function SignUp({ width, setIsSignUp, AuthContext }) {
             :
             <>
               <Btn
-                width={width < 500 ? 70 : 27}
+                width={width < widthMax ? 70 : 27}
                 onClick={handleSubmit}
                 background='#00A3FF'
                 color='#fff'
               >Finalizar</Btn>
               <Btn
-                width={width < 500 ? 70 : 27}
+                width={width < widthMax ? 70 : 27}
                 onClick={() => setIsNxt(true)}
                 background='#CCEDFF'
                 color='#343A40'

@@ -11,7 +11,7 @@ export const Container = styled.div`
     }
 `;
 export const AreaSocial = styled.div`
-    width:${props => props.width}vw;
+    width:${props => props.width};
     height:4vh ;
     display:flex ;
     flex-direction:row ;
@@ -40,7 +40,7 @@ export const AreaSocial = styled.div`
 `;
 
 export const TextArea = styled.textarea`
-    width:${props => props.width}vw;
+    width:${props => props.width};
     height:30vh ;
     border-radius:8px ;
     padding:10px ;

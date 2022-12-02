@@ -2,7 +2,15 @@ import React, { useContext } from 'react';
 import { Container, AreaInfo } from './styles';
 import { BsCheck2Square } from "react-icons/bs";
 
-export default function ProdutoView({ data, setActive, setDataRouter, setRoute, width, AuthContext }) {
+export default function ProdutoView({
+  data,
+  setActive,
+  setDataRouter,
+  setRoute,
+  width,
+  AuthContext,
+  widthMax
+}) {
   const { signed, auth } = useContext(AuthContext);
 
   const sendData = (res) => {
@@ -17,7 +25,7 @@ export default function ProdutoView({ data, setActive, setDataRouter, setRoute, 
   };
 
   return (
-    <Container width={width < 500 ? 90 : 40}>
+    <Container width={width < widthMax ? '82vw' : '550px'}>
       <img src={`data:image/jpeg;base64,${data.img}`} alt='imgCentral' />
       <div>
         <h4>{data.title}</h4>

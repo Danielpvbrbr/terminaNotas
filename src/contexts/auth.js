@@ -23,7 +23,6 @@ export default function AuthProvider({ children }) {
                     "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
                 }
             };
-
             setStorage({
                 myToken: JSON.parse(myToken),
                 myId: myId,
@@ -47,7 +46,9 @@ export default function AuthProvider({ children }) {
         data_Codig,
         checking,
         msgErr,
-        setMsgErr
+        setMsgErr,
+        fullUser,
+        updUsersAddres
     } = userAuth({ storage, socket });
 
     const {
@@ -86,7 +87,9 @@ export default function AuthProvider({ children }) {
             data_Codig,
             checking,
             msgErr,
-            setMsgErr
+            setMsgErr,
+            fullUser,
+            updUsersAddres
         }}>
             {children}
 

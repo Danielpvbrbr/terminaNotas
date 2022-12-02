@@ -12,7 +12,7 @@ export const Container = styled.div`
 `;
 
 export const LineOption = styled.div`
-    width:${props=>props.width}vw;
+    width:${props=>props.width};
     display:flex ;
     flex-direction:column ;
     padding:6px ;
@@ -24,7 +24,7 @@ export const LineOption = styled.div`
     border-radius:3px ;
 
     section{
-      width:${props=>props.width -1}vw;
+      width:${props=>props.width -1};
       height:30px ;
       display:flex ;
       flex-direction:row ;
@@ -33,7 +33,7 @@ export const LineOption = styled.div`
     }
 
     div{
-      width:${props=>props.width -1}vw;
+      width:${props=>props.width -1};
     }
     div p{
       font-weight:300 ;

@@ -1,7 +1,7 @@
 import styled, { keyframes } from 'styled-components';
 
 export const Container = styled.div`
-    width:${props => props.width}vw;
+    width:${props => props.width};
     height:${props => props.height}px;
     margin-top:5px ;
     flex-wrap: wrap;
@@ -11,7 +11,6 @@ export const Container = styled.div`
     justify-content: space-between;
     margin-top:8px ;
     margin-bottom:8px ;
-
 `;
 export const BtnAdd = styled.button`
     width:160px;

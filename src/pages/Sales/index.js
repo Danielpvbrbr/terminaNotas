@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Container } from './styles';
 import AreaSales from '../../components/AreaSales';
 
-export default function Sales({ width, AuthContext }) {
+export default function Sales({ width, widthMax, AuthContext }) {
   const { auth, purchasesFilter } = useContext(AuthContext);
 
   return (
@@ -14,6 +14,7 @@ export default function Sales({ width, AuthContext }) {
           key={i}
           data={v}
           width={width}
+          widthMax={widthMax}
           privilege={auth.privilege}
         />
       )}

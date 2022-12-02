@@ -22,30 +22,34 @@ export const Container = styled.div`
 `;
 
 export const AreaForm = styled.div`
-    width:${props => props.width}vw;
-    /* height:39vh ; */
+    width:${props => props.width -3}vw;
+    height:40.5vh ;
     display:flex ;
     flex-direction:column ;
     justify-content:center;
     align-items: center ;
+    background:rgba(0,0,0,0.5) ;
+    border-radius: 7px;
+
     ul{
         display:flex ;
         flex-direction:column ;
-        justify-content:space-evenly ;
-        align-items: center ;
+        justify-content:center ;
+        align-items: start ;
+        height:29vh ;
     }
-    ul button{
+     button{
         width:150px ;
-        height:27px ;
-        background-color:#00A3FF ;
-        color:#fff ;
+        height:35px ;
+        background-color:#fff ;
+        color:#000 ;
         border-radius:5px ;
         cursor: pointer;
         border:none ;
-        margin-top:3px ;
+        margin-top:5px ;
     }
     li{
-        font-size:25pt ;
+        font-size:20pt ;
         color:#fff ;
         list-style:none ;
         font-weight:bold ;
@@ -60,8 +64,6 @@ export const AreaForm = styled.div`
        margin-right :3px ;
        color: #fff;
     }
-    svg{
-        margin-top :3px ; 
-    }
+  
 `;
 

@@ -1,47 +1,85 @@
 import React, { useState } from 'react';
 import { Container, AreaIcone } from './styles';
 import {
-  BsFillCloudCheckFill,
-  BsPencilSquare
+  BsUnlockFill,
+  BsFillLockFill
 } from "react-icons/bs";
+
 import InputLabel from '../InputLabel';
+import SelectLabel from '../SelectLabel';
 
-export default function InputUsers({ type, label, value, Icon, placeholder, onChange, width, background }) {
+export default function InputUsers({
+  type,
+  label,
+  value,
+  Icon,
+  placeholder,
+  onChange,
+  width,
+  background,
+  disabled,
+  edit,
+  isOption,
+  data,
+  setIsLock
+}) {
+  const [isEdit, setIsEdit] = useState(false);
 
-  const handleSubmit = () => {
-    alert(value)
+  const handleIsLock = (el) => {
+    setIsEdit(el)
+    setIsLock(el);
   };
 
   return (
     <Container width={width}>
-      <InputLabel
-        type={type}
-        onChange={onChange}
-        value={value}
-        placeholder={placeholder}
-        label={label}
-        Icon={Icon}
-        width={width -2}
-        background={background}
-        isIcon={false}
-      />
-      <AreaIcone>
-        {value.length > 0 ?
-          <BsFillCloudCheckFill
-            size={20}
-            color='#CED4DA'
-            cursor='pointer'
-            onClick={handleSubmit}
-          />
-          :
-          <BsPencilSquare
-            size={20}
-            color='#CCEDFF'
+      {isOption ?
+        <SelectLabel
+          type={type}
+          onChange={onChange}
+          value={value}
+          placeholder={placeholder}
+          label={label}
+          Icon={Icon}
+          width={width - 1}
+          background={background}
+          isIcon={false}
+          disabled={disabled || !isEdit}
+          data={data}
+        />
+        :
+        <InputLabel
+          type={type}
+          onChange={onChange}
+          value={value}
+          placeholder={placeholder}
+          label={label}
+          Icon={Icon}
+          width={width - 1}
+          background={background}
+          isIcon={false}
+          disabled={disabled || !isEdit}
+        />
+      }
 
-          />
-        }
-      </AreaIcone>
-
+      {
+        edit &&
+        <AreaIcone>
+          {isEdit ?
+            <BsUnlockFill
+              size={20}
+              color='#ff0000'
+              cursor='pointer'
+              onClick={() => handleIsLock(!isEdit)}
+            />
+            :
+            <BsFillLockFill
+              size={20}
+              color='#00A3FF'
+              onClick={() => handleIsLock(!isEdit)}
+            />
+          }
+        </AreaIcone>
+      }
     </Container>
   )
 };

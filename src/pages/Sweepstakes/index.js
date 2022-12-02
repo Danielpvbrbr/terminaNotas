@@ -11,7 +11,8 @@ export default function Sweepstakes({
   setActive,
   setRoute,
   width,
-  AuthContext
+  AuthContext,
+  widthMax
 }) {
   const { auth, sweepstakes, signed } = useContext(AuthContext);
   const filter = sweepstakes.filter(pers => pers.status === active);
@@ -24,9 +25,9 @@ export default function Sweepstakes({
   return (
     <Container >
       <h4>Sorteios</h4>
-      <AreaOption width={width < 500 ? 90 : 40}>
+      <AreaOption width={width < widthMax ? '82vw' : '550px'}>
         <Option
-          width={width < 500 ? 108 : 120}
+          width={width < widthMax ? 102 : 115}
           onClick={() => setActive('Active')}
           bg={active === 'Active'}
           border={false}
@@ -36,7 +37,7 @@ export default function Sweepstakes({
         </Option>
 
         <Option
-          width={width < 500 ? 108 : 120}
+          width={width < widthMax ? 102 : 115}
           onClick={() => setActive('Concluded')}
           bg={active === 'Concluded'}
           border={true} pos='center'
@@ -45,7 +46,7 @@ export default function Sweepstakes({
         </Option>
 
         <Option
-          width={width < 500 ? 108 : 120}
+          width={width < widthMax ? 102 : 115}
           onClick={() => setActive('Coming')}
           bg={active === 'Coming'}
           border={true}
@@ -54,9 +55,9 @@ export default function Sweepstakes({
           Em breve
         </Option>
 
-        {true&&
+        {auth.privilege &&
           <Option
-            width={width < 500 ? 108 : 120}
+            width={width < widthMax ? 102 : 115}
             onClick={() => setActive('Add')}
             bg={active === 'Add'}
             border={true}
@@ -80,6 +81,7 @@ export default function Sweepstakes({
               <AreaSubPubl
                 data={v}
                 width={width}
+                widthMax={widthMax}
                 AuthContext={AuthContext}
                 setRoute={setRoute}
                 setActive={'Add'}
