@@ -34,6 +34,8 @@ export default function SignIn({ setIsForm, width, widthMax, setIsSignUp, AuthCo
           <RecoverPassword
             setIsForm={setIsForm}
             width={width}
+            width2={width}
+            widthMax={widthMax}
             AuthContext={AuthContext}
             setisRecovery={setisRecovery}
           />

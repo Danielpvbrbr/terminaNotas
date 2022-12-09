@@ -16,12 +16,13 @@ export const Container = styled.div`
    margin-bottom:2px ;
 `;
 export const Alert = styled.div`
+   width:${props => props.width};
    display:flex ;
    justify-content:center ;
    align-items:center ;
    border-radius:5px ;
    margin-bottom:2px ;
-   background-color: #32CD32;
+   background-color: ${props => props.color};
    height:45px ;
    
    p{
@@ -30,11 +31,12 @@ export const Alert = styled.div`
 `;
 
 export const Info = styled.section`
-    width:${props => props.width}vw;
+    width:${props => props.width};
     background-color:#fff ;
     display:flex ;
     justify-content:space-evenly;
     flex-direction:column ;
+    align-items:center ;
     padding:3px ;
     border-radius: 5px;
     margin-top:20px ;
@@ -77,7 +79,7 @@ export const Info = styled.section`
     }
 `;
 export const Button = styled.button`
-        width:${props => props.width}vw;
+        width:${props => props.width};
         background-color:${props => props.bgColor};
         animation:${animated} 0.5s linear ;
         color:#fff ;
@@ -92,4 +94,5 @@ export const Button = styled.button`
         outline: none;
         border:none ;
         cursor: pointer;
+        border-radius:5px ;
 `;

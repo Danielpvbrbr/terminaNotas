@@ -22,7 +22,7 @@ export const Container = styled.div`
 `;
 
 export const AreaForm = styled.div`
-    width:${props => props.width}vw;
+    width:${props => props.width};
     background-color: #fff;
     border-radius:5px;
  
@@ -68,7 +68,7 @@ export const AreaButton = styled.div`
     }
 `;
 export const Btn = styled.button`
-        width:${props => props.width}vw;
+        width:${props => props.width};
         height:40px ;
         background-color:${props => props.background};
         border:none ;

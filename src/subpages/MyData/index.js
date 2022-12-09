@@ -66,9 +66,9 @@ export default function MyData({ width, widthMax, AuthContext }) {
 
   return (
     <Container >
-      <Info width={width < widthMax ? 90 : 40}>
-        {!msgErr.err &&
-          <Alert>
+      <Info width={width < widthMax ? '82vw' : '520px'}>
+        {msgErr.message.length > 0 &&
+          <Alert width={width < widthMax ? '81vw' : '510px'} color={msgErr.err ? '#ff0000' : '#32CD32'}>
             <p>{msgErr.message}</p>
           </Alert>
         }
@@ -87,9 +87,11 @@ export default function MyData({ width, widthMax, AuthContext }) {
               label='Nome completo:'
               value={name}
               Icon={BsFillTelephoneFill}
-              width={width < widthMax ? 84 : 39}
+              width={width < widthMax ? '77vw' : '500px'}
+              width2={width < widthMax ? '63vw' : '440px'}//Modifica o tamanho do input
+              widthMax={widthMax}
               placeholder='Digite seu nome!'
-              background='#fff'
+              // background='#fff'
               onChange={e => setName(e.target.value)}
               edit={true}
               setIsLock={(el) => setIsLock(el)}
@@ -101,10 +103,12 @@ export default function MyData({ width, widthMax, AuthContext }) {
               label='CPF:'
               value={CPF}
               Icon={BsFillTelephoneFill}
-              width={width < widthMax ? 40 : 10.5}
+              width={width < widthMax ? '73vw' : '480px'}
+              width2={width < widthMax ? '63vw' : '440px'}//Modifica o tamanho do input
+              widthMax={widthMax}
               placeholder='ex: 13975898765'
               onChange={e => setCPF(e.target.value)}
-              disabled={true}
+              disabled={false} //Somente aqui
               edit={false}
               setIsLock={(el) => setIsLock(el)}
             />
@@ -115,7 +119,9 @@ export default function MyData({ width, widthMax, AuthContext }) {
               label='E-mail:'
               value={email}
               Icon={BsFillTelephoneFill}
-              width={width < widthMax ? 84 : 39}
+              width={width < widthMax ? '77vw' : '500px'}
+              width2={width < widthMax ? '63vw' : '440px'}//Modifica o tamanho do input
+              widthMax={widthMax}
               placeholder='exemplo@exemplo.com'
               onChange={e => setEmail(e.target.value)}
               edit={true}
@@ -128,7 +134,9 @@ export default function MyData({ width, widthMax, AuthContext }) {
               label='Senha:'
               value={password}
               Icon={BsFillTelephoneFill}
-              width={width < widthMax ? 84 : 39}
+              width={width < widthMax ? '77vw' : '500px'}
+              width2={width < widthMax ? '63vw' : '440px'}//Modifica o tamanho do input
+              widthMax={widthMax}
               placeholder='Digite sua senha'
               onChange={e => setPassword(e.target.value)}
               edit={true}
@@ -141,7 +149,9 @@ export default function MyData({ width, widthMax, AuthContext }) {
               label='Telefone:'
               value={phone}
               Icon={BsFillTelephoneFill}
-              width={width < widthMax ? 40 : 10.5}
+              width={width < widthMax ? '77vw' : '500px'}
+              width2={width < widthMax ? '63vw' : '440px'}//Modifica o tamanho do input
+              widthMax={widthMax}
               placeholder='ex: 999999999'
               onChange={e => setPhone(e.target.value)}
               edit={true}
@@ -162,7 +172,9 @@ export default function MyData({ width, widthMax, AuthContext }) {
               label='CEP:'
               value={CEP}
               Icon={BsFillTelephoneFill}
-              width={width < widthMax ? 40 : 10.5}
+              width={width < widthMax ? '77vw' : '500px'}
+              width2={width < widthMax ? '63vw' : '440px'}//Modifica o tamanho do input
+              widthMax={widthMax}
               placeholder='ex: 32080365'
               onChange={e => setCEP(e.target.value)}
               edit={true}
@@ -175,7 +187,9 @@ export default function MyData({ width, widthMax, AuthContext }) {
               label='Logradouro:'
               value={logradouro}
               Icon={BsFillTelephoneFill}
-              width={width < widthMax ? 84 : 39}
+              width={width < widthMax ? '77vw' : '500px'}
+              width2={width < widthMax ? '63vw' : '440px'}//Modifica o tamanho do input
+              widthMax={widthMax}
               placeholder='ex: rua'
               onChange={e => setLogradouro(e.target.value)}
               edit={true}
@@ -188,7 +202,9 @@ export default function MyData({ width, widthMax, AuthContext }) {
               label='Número:'
               value={number}
               Icon={BsFillTelephoneFill}
-              width={width < widthMax ? 40 : 7}
+              width={width < widthMax ? '77vw' : '500px'}
+              width2={width < widthMax ? '63vw' : '440px'}//Modifica o tamanho do input
+              widthMax={widthMax}
               placeholder='Digite o numero da residência '
               onChange={e => setNumber(e.target.value)}
               edit={true}
@@ -201,7 +217,9 @@ export default function MyData({ width, widthMax, AuthContext }) {
               label='Bairro:'
               value={neighborhood}
               Icon={BsFillTelephoneFill}
-              width={width < widthMax ? 84 : 39}
+              width={width < widthMax ? '77vw' : '500px'}
+              width2={width < widthMax ? '63vw' : '440px'}//Modifica o tamanho do input
+              widthMax={widthMax}
               placeholder='Digite o nome do bairro'
               onChange={e => setNeighborhood(e.target.value)}
               edit={true}
@@ -214,7 +232,9 @@ export default function MyData({ width, widthMax, AuthContext }) {
               label='Complemento:'
               value={complement}
               Icon={BsFillTelephoneFill}
-              width={width < widthMax ? 84 : 39}
+              width={width < widthMax ? '77vw' : '500px'}
+              width2={width < widthMax ? '63vw' : '440px'}//Modifica o tamanho do input
+              widthMax={widthMax}
               placeholder='ex: casa2, apart'
               onChange={e => setComplement(e.target.value)}
               edit={true}
@@ -228,7 +248,9 @@ export default function MyData({ width, widthMax, AuthContext }) {
               data={uf_data}
               value={uf}
               Icon={BsFillTelephoneFill}
-              width={width < widthMax ? 40 : 7}
+              width={width < widthMax ? '77vw' : '500px'}
+              width2={width < widthMax ? '63vw' : '440px'}//Modifica o tamanho do input
+              widthMax={widthMax}
               placeholder='UF'
               onChange={e => setUf(e.target.value)}
               edit={true}
@@ -242,7 +264,9 @@ export default function MyData({ width, widthMax, AuthContext }) {
               label='Cidade:'
               value={city}
               Icon={BsFillTelephoneFill}
-              width={width < widthMax ? 84 : 39}
+              width={width < widthMax ? '77vw' : '500px'}
+              width2={width < widthMax ? '63vw' : '440px'}//Modifica o tamanho do input
+              widthMax={widthMax}
               placeholder='Digite o nome da cidade'
               onChange={e => setCity(e.target.value)}
               edit={true}
@@ -252,10 +276,12 @@ export default function MyData({ width, widthMax, AuthContext }) {
           <li>
             <InputUsers
               type='text'
-              label='Ponto de referência::'
+              label='Ponto de referência:'
               value={reference}
               Icon={BsFillTelephoneFill}
-              width={width < widthMax ? 84 : 39}
+              width={width < widthMax ? '77vw' : '500px'}
+              width2={width < widthMax ? '63vw' : '440px'}//Modifica o tamanho do input
+              widthMax={widthMax}
               placeholder='ex: Perto de uma arvore'
               onChange={e => setReference(e.target.value)}
               edit={true}
@@ -265,7 +291,7 @@ export default function MyData({ width, widthMax, AuthContext }) {
         </ul>
         {isLock &&
           <Button
-            width={width < widthMax ? 88 : 39}
+            width={width < widthMax ? '70vw' : '480px'}
             bgColor={checking ? '#32CD32' : '#00A3FF'}
             onClick={handleSubmit}
           >

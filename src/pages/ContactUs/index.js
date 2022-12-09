@@ -8,11 +8,11 @@ export default function ContactUs({ width, widthMax }) {
     <Container>
       <h4>Fale Conosco</h4>
       <TextArea
-        width={width < widthMax ? '82vw' : '550px'}
+        width={width < widthMax ? '82vw' : '545px'}
         placeholder='Digite sua mensagem...'
       />
 
-      <AreaSocial width={width < widthMax ? '82vw' : '550px'}>
+      <AreaSocial width={width < widthMax ? '82vw' : '545px'}>
         <button>Enviar</button>
         ou
         <span>

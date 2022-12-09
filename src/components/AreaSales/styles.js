@@ -14,8 +14,6 @@ export const Area = styled.section`
     justify-content:space-evenly;
     align-items:center ;
 
-    border:1px solid ;
-
     img{
         width:100px ;
         height:100px ; 

@@ -17,23 +17,23 @@ export default function MyAccount({ setRoute, width, widthMax, signed, setIsForm
     <Container>
       <h4>Dados do usuário</h4>
 
-      <LineOption onClick={() => handleSend('/MyShopping')} width={width < widthMax ? '82vw' : '550px'}>
+      <LineOption onClick={() => handleSend('/MyShopping')} width={width < widthMax ? '82vw' : '545px'}>
         <h3>Minhas compras</h3>
         <BsChevronCompactRight size={20} color='#23B0FF' />
       </LineOption>
 
-      <LineOption onClick={() => handleSend('/MyData')} width={width < widthMax ? '82vw' : '550px'}>
+      <LineOption onClick={() => handleSend('/MyData')} width={width < widthMax ? '82vw' : '545px'}>
         <h3>Atualizar cadastro</h3>
         <BsChevronCompactRight size={20} color='#23B0FF' />
       </LineOption>
 
-      <LineOption onClick={() => setRoute('/Doubt')} width={width < widthMax ? '82vw' : '550px'}>
+      <LineOption onClick={() => setRoute('/Doubt')} width={width < widthMax ? '82vw' : '545px'}>
         <h3>Duvidas</h3>
         <BsChevronCompactRight size={20} color='#23B0FF' />
       </LineOption>
       {
         signed &&
-        <LineOption onClick={signOut} width={width < widthMax ? '82vw' : '550px'}>
+        <LineOption onClick={signOut} width={width < widthMax ? '82vw' : '545px'}>
           <p>{auth && auth.name}</p>
           <BsBoxArrowRight size={20} color='#ff0000' />
         </LineOption>

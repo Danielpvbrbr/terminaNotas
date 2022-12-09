@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-   width: ${props => props.width}vw;
+   width: ${props => props.width};
    display:flex ;
    flex-direction:row;
    justify-content:space-between ;

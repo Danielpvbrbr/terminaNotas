@@ -44,11 +44,9 @@ export default function App() {
     const [dataRouter, setDataRouter] = useState([]);
     const [width, setWidth] = useState('' || width_);
     const widthMax = 701;
-    console.log(widthMax)
 
     function start() {
         setWidth(document.documentElement.clientWidth);
-        console.log(width)
     };
 
     const RotaActive = () => {

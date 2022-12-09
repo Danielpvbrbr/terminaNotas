@@ -4,7 +4,7 @@ import { BsChevronRight, BsChevronDown, BsExclamationCircle, } from "react-icons
 
 export default function AreaSales({ key, data, width, privilege, widthMax }) {
   const [isOpen, setisOpen] = useState(false);
-console.log(width < widthMax ? '84vw' : '535px')
+
   return (
     <Container key={key}>
       <Area width={width < widthMax ? '84vw' : '535px'}>

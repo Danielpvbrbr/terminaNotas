@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const Container = styled.section`
     width:${props => props.width};
-    height:${props => props.height}px ;
+    /* height:${props => props.height}px ; */
     margin-top:5px ;
     background-color:#fff;
     border-radius: 5px;
@@ -15,7 +15,7 @@ export const Container = styled.section`
 
     div{
         width:${props => props.width}vw;
-        height:${props => props.height}px ;
+        /* height:${props => props.height}px ; */
         display:flex ;
         flex-direction:column;
         justify-content:center ;

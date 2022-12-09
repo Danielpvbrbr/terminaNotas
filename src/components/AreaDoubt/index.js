@@ -26,9 +26,6 @@ export default function AreaDoubt({ setIsForm, signed, AuthContext }) {
       <h4>Perguntas frequentes</h4>
       <ListQuestions>
         <Line>-{">"} Como ver meus números?</Line>
-        <Line>-{">"} Como ver meus números??</Line>
-        <Line>-{">"} Como ver meus números?</Line>
-        <Line>-{">"} Como ver meus números?</Line>
       </ListQuestions>
     </Container>
   )

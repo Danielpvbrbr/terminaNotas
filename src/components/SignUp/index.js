@@ -1,8 +1,23 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Container, AreaForm, AreaButton, Btn } from './styles';
-import { BsX } from "react-icons/bs";
+import {
+  BsX,
+  BsFillFileEarmarkPersonFill,
+  BsFillEnvelopeFill,
+  BsFillTelephoneFill,
+  BsFillLockFill,
+  BsFillPersonFill,
+  BsFillPinMapFill,
+  BsFillPinFill,
+  BsFillMapFill,
+  BsGeoAltFill,
+  BsGeoFill,
+  BsHouseDoor,
+  BsFillExclamationCircleFill,
+  BsFillFlagFill
+} from "react-icons/bs";
 import InputLabel from '../../components/InputLabel';
-import { BsFillTelephoneFill, } from "react-icons/bs";
+
 import axios from 'axios';
 
 export default function SignUp({ width, widthMax, setIsSignUp, AuthContext }) {
@@ -74,7 +89,7 @@ export default function SignUp({ width, widthMax, setIsSignUp, AuthContext }) {
 
   return (
     <Container>
-      <AreaForm width={width < widthMax ? 80 : 30}>
+      <AreaForm width={width < widthMax ? '57vw' : '360px'}>
         <header>
           <h4>Cadastro</h4>
           <BsX
@@ -91,84 +106,84 @@ export default function SignUp({ width, widthMax, setIsSignUp, AuthContext }) {
               label='Nome completo:'
               name={'name'}
               value={name}
-              Icon={BsFillTelephoneFill}
-              width={width < widthMax ? 70 : 27}
-              width2={width}//Modifica o tamanho do input
+              Icon={BsFillPersonFill}
+              width={width < widthMax ? '55vw' : '340px'}
+              width2={width < widthMax ? '49vw' : '300px'}//Modifica o tamanho do input
               placeholder='Digite seu nome!'
               onChange={e => setName(e.target.value)}
               background='#fff'
-              isIcon={false}
+              isIcon={true}
               maxLength={40}
             />
             <InputLabel
               type='number'
               label='CPF:'
-              name={'name'}
+              name={'CPF'}
               value={CPF}
-              Icon={BsFillTelephoneFill}
-              width={width < widthMax ? 70 : 27}
-              width2={width}//Modifica o tamanho do input
+              Icon={BsFillFileEarmarkPersonFill}
+              width={width < widthMax ? '55vw' : '340px'}
+              width2={width < widthMax ? '49vw' : '300px'}//Modifica o tamanho do input
               placeholder='Digite o seu CPF '
               onChange={e => setCPF(e.target.value)}
               background='#fff'
-              isIcon={false}
+              isIcon={true}
               maxLength={11}
             />
             <InputLabel
               type='email'
               label='E-mail:'
-              name={'name'}
+              name={'email'}
               value={email}
-              Icon={BsFillTelephoneFill}
-              width={width < widthMax ? 70 : 27}
-              width2={width}//Modifica o tamanho do input
+              Icon={BsFillEnvelopeFill}
+              width={width < widthMax ? '55vw' : '340px'}
+              width2={width < widthMax ? '49vw' : '300px'}//Modifica o tamanho do input
               placeholder='exemplo@exemplo.com'
               onChange={e => setEmail(e.target.value)}
               maxLength={40}
               background='#fff'
-              isIcon={false}
+              isIcon={true}
             />
             <InputLabel
               type='password'
               label='Senha:'
-              name={'name'}
+              name={'password'}
               value={password}
-              Icon={BsFillTelephoneFill}
-              width={width < widthMax ? 70 : 27}
-              width2={width}//Modifica o tamanho do input
+              Icon={BsFillLockFill}
+              width={width < widthMax ? '55vw' : '340px'}
+              width2={width < widthMax ? '49vw' : '300px'}//Modifica o tamanho do input
               placeholder='Digite sua senha'
               maxLength={8}
               onChange={e => setPassword(e.target.value)}
               background='#fff'
-              isIcon={false}
+              isIcon={true}
             />
             <InputLabel
               type='password'
               label='Repita a senha:'
-              name={'name'}
+              name={'isPassword'}
               value={isPassword}
-              Icon={BsFillTelephoneFill}
-              width={width < widthMax ? 70 : 27}
-              width2={width}//Modifica o tamanho do input
+              Icon={BsFillLockFill}
+              width={width < widthMax ? '55vw' : '340px'}
+              width2={width < widthMax ? '49vw' : '300px'}//Modifica o tamanho do input
               placeholder='Confirme a senha'
               onChange={e => setIsPassword(e.target.value)}
               background='#fff'
               maxLength={8}
-              isIcon={false}
+              isIcon={true}
             />
             <InputLabel
               type='text'
               label='Telefone:'
-              name={'name'}
+              name={'phone'}
               value={phone}
               Icon={BsFillTelephoneFill}
-              width={width < widthMax ? 70 : 27}
-              width2={width}//Modifica o tamanho do input
+              width={width < widthMax ? '55vw' : '340px'}
+              width2={width < widthMax ? '49vw' : '300px'}//Modifica o tamanho do input
               placeholder='Digite seu telefone'
               onChange={e => setPhone(e.target.value)}
               background='#fff'
               maxLength={11}
-              isIcon={false}
+              isIcon={true}
             />
           </section>
           :
@@ -176,121 +191,121 @@ export default function SignUp({ width, widthMax, setIsSignUp, AuthContext }) {
             <InputLabel
               type='number'
               label='CEP:'
-              name={'name'}
+              name={'CEP'}
               value={CEP}
-              Icon={BsFillTelephoneFill}
-              width={width < widthMax ? 70 : 27}
-              width2={width}//Modifica o tamanho do input
+              Icon={BsFillPinMapFill}
+              width={width < widthMax ? '55vw' : '340px'}
+              width2={width < widthMax ? '49vw' : '300px'}//Modifica o tamanho do input
               placeholder='Digite seu CEP..'
               onChange={e => setCEP(e.target.value)}
               maxLength={9}
               background='#fff'
-              isIcon={false}
+              isIcon={true}
             />
             <InputLabel
               type='text'
               label='Logradouro:'
-              name={'name'}
+              name={'Logradouro'}
               value={logradouro}
-              Icon={BsFillTelephoneFill}
-              width={width < widthMax ? 70 : 27}
-              width2={width}//Modifica o tamanho do input
+              Icon={BsFillMapFill}
+              width={width < widthMax ? '55vw' : '340px'}
+              width2={width < widthMax ? '49vw' : '300px'}//Modifica o tamanho do input
               placeholder='Digite o Logradouro..'
               onChange={e => setLogradouro(e.target.value)}
               background='#fff'
               maxLength={30}
-              isIcon={false}
+              isIcon={true}
             />
             <InputLabel
               type='number'
               label='Número:'
-              name={'name'}
+              name={'number'}
               value={number}
-              Icon={BsFillTelephoneFill}
-              width={width < widthMax ? 70 : 27}
-              width2={width}//Modifica o tamanho do input
+              Icon={BsFillExclamationCircleFill}
+              width={width < widthMax ? '55vw' : '340px'}
+              width2={width < widthMax ? '49vw' : '300px'}//Modifica o tamanho do input
               placeholder='Digite o numero...'
               onChange={e => setNumber(e.target.value)}
               background='#fff'
               maxLength={5}
-              isIcon={false}
+              isIcon={true}
             />
             <InputLabel
               type='text'
               label='Bairro:'
-              name={'name'}
+              name={'neighborhood'}
               value={neighborhood}
-              Icon={BsFillTelephoneFill}
-              width={width < widthMax ? 70 : 27}
-              width2={width}//Modifica o tamanho do input
+              Icon={BsFillPinFill}
+              width={width < widthMax ? '55vw' : '340px'}
+              width2={width < widthMax ? '49vw' : '300px'}//Modifica o tamanho do input
               placeholder='Digite o bairro...'
               onChange={e => setNeighborhood(e.target.value)}
               background='#fff'
-              isIcon={false}
+              isIcon={true}
               maxLength={30}
             />
             <InputLabel
               type='text'
               label='Complemento:'
-              name={'name'}
+              name={'Complemento'}
               value={complement}
-              Icon={BsFillTelephoneFill}
-              width={width < widthMax ? 70 : 27}
-              width2={width}//Modifica o tamanho do input
+              Icon={BsHouseDoor}
+              width={width < widthMax ? '55vw' : '340px'}
+              width2={width < widthMax ? '49vw' : '300px'}//Modifica o tamanho do input
               placeholder='Exemplo: casa 2'
               onChange={e => setComplement(e.target.value)}
               background='#fff'
-              isIcon={false}
+              isIcon={true}
               maxLength={30}
             />
             <InputLabel
               type='text'
               label='UF:'
-              name={'name'}
+              name={'uf'}
               value={uf}
-              Icon={BsFillTelephoneFill}
-              width={width < widthMax ? 70 : 27}
-              width2={width}//Modifica o tamanho do input
+              Icon={BsGeoFill}
+              width={width < widthMax ? '55vw' : '340px'}
+              width2={width < widthMax ? '49vw' : '300px'}//Modifica o tamanho do input
               placeholder='UF...'
               onChange={e => setUF(e.target.value)}
               background='#fff'
               maxLength={5}
-              isIcon={false}
+              isIcon={true}
             />
             <InputLabel
               type='text'
               label='Cidade:'
-              name={'name'}
+              name={'city'}
               value={city}
-              Icon={BsFillTelephoneFill}
-              width={width < widthMax ? 70 : 27}
-              width2={width}//Modifica o tamanho do input
+              Icon={BsGeoAltFill}
+              width={width < widthMax ? '55vw' : '340px'}
+              width2={width < widthMax ? '49vw' : '300px'}//Modifica o tamanho do input
               placeholder='Digite o nome da cidade...'
               onChange={e => setCity(e.target.value)}
               background='#fff'
               maxLength={40}
-              isIcon={false}
+              isIcon={true}
             />
             <InputLabel
               type='text'
               label='Ponto de referência:'
-              name={'name'}
+              name={'reference'}
               value={reference}
-              Icon={BsFillTelephoneFill}
-              width={width < widthMax ? 70 : 27}
-              width2={width}//Modifica o tamanho do input
+              Icon={BsFillFlagFill}
+              width={width < widthMax ? '55vw' : '340px'}
+              width2={width < widthMax ? '49vw' : '300px'}//Modifica o tamanho do input
               placeholder='Examplo: Perto de uma arvore...'
               onChange={e => setReference(e.target.value)}
               background='#fff'
               maxLength={40}
-              isIcon={false}
+              isIcon={true}
             />
           </section>
         }
         <AreaButton >
           {isNxt ?
             <Btn
-              width={width < widthMax ? 70 : 27}
+              width={width < widthMax ? '55vw' : '340px'}
               onClick={() => next(false)}
               background='#00A3FF'
               color='#fff'
@@ -298,13 +313,13 @@ export default function SignUp({ width, widthMax, setIsSignUp, AuthContext }) {
             :
             <>
               <Btn
-                width={width < widthMax ? 70 : 27}
+                width={width < widthMax ? '55vw' : '340px'}
                 onClick={handleSubmit}
                 background='#00A3FF'
                 color='#fff'
               >Finalizar</Btn>
               <Btn
-                width={width < widthMax ? 70 : 27}
+                width={width < widthMax ? '55vw' : '340px'}
                 onClick={() => setIsNxt(true)}
                 background='#CCEDFF'
                 color='#343A40'

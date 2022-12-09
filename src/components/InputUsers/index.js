@@ -16,12 +16,14 @@ export default function InputUsers({
   placeholder,
   onChange,
   width,
+  width2,
   background,
   disabled,
   edit,
   isOption,
   data,
-  setIsLock
+  setIsLock,
+  widthMax
 }) {
   const [isEdit, setIsEdit] = useState(false);
 
@@ -40,7 +42,7 @@ export default function InputUsers({
           placeholder={placeholder}
           label={label}
           Icon={Icon}
-          width={width - 1}
+          width={width}
           background={background}
           isIcon={false}
           disabled={disabled || !isEdit}
@@ -54,9 +56,11 @@ export default function InputUsers({
           placeholder={placeholder}
           label={label}
           Icon={Icon}
-          width={width - 1}
+          width={width}
+          width2={width2}
+          widthMax={widthMax}
           background={background}
-          isIcon={false}
+          isIcon={true}
           disabled={disabled || !isEdit}
         />
       }

@@ -11,7 +11,7 @@ export const Container = styled.div`
     } */
 `;
 export const Area = styled.div`
-    width:${props => props.width}vw;
+    width:${props => props.width};
     display:flex ;
     flex-direction:column ;
     align-items:center ;
@@ -28,7 +28,7 @@ export const Area = styled.div`
     }
 `;
 export const Button = styled.button`
-        width:${props => props.width}vw;
+        width:${props => props.width};
         height:45px ;
         background-color:${props => props.bg};
         border:none ;
@@ -39,16 +39,17 @@ export const Button = styled.button`
         cursor: pointer;
 `;
 export const AreaUpload = styled.section`
-    width:${props => props.width}vw;
+    width:${props => props.width};
     height:36vh ;
     display:flex ;
     flex-direction:column ;
     align-items:flex-start ;
     padding:3px ;
     margin-top:5px ;
+    border:1px solid ;
 
     section{
-        width:${props => props.width - 1}vw;
+        width:${props => props.width - 1};
         height:30vh ;
         display:flex ;
         flex-direction:column ;
@@ -61,25 +62,25 @@ export const AreaUpload = styled.section`
     input{
         margin-left:1px ;
     }
-    img{
-        width:${props => props.width - 0.9}vw;
-        height:30vh ;
-    }
+`;
+export const Preview = styled.img`
+    width:${props => props.width};
+    height:30vh ;
 `;
 export const AreaDesc = styled.div`
-    width:${props => props.width}vw;
+    width:${props => props.width};
     display:flex ;
     flex-direction:column ;
     padding:4px ;
-
-    textarea{
+`;
+export const AreaText = styled.textarea`
+        width:${props => props.width};
         padding:5px ;
         margin-top:1px ;
         border:1px solid #c2c9d6 ;
-    }
 `;
 export const AreaOption = styled.div`
-        width:${props => props.width}vw;
+        width:${props => props.width};
         border-radius:5px ;
         padding:5px ;
         background-color:#00A3FF ;
@@ -91,7 +92,7 @@ export const AreaOption = styled.div`
             padding-top:-30 ;
         }
         section{
-            width:${props => props.width -1}vw;
+            width:${props => props.width - 1};
             margin-top:2px ;
             border-top:1px solid #c2c9d6 ;   
         }
@@ -108,7 +109,7 @@ export const AreaOption = styled.div`
 `;
 
 export const Status = styled.select`
-        width:${props => props.width}vw;
+        width:${props => props.width};
         height:30px ; 
         margin-top:5px ;
         margin-bottom:8px ;

@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useState, useEffect } from 'react';
 import api from '../../services/api';
+import veryAuth from '../veryAuth';
 
 export default function Sweepstakes(El) {
     const [sweepstakes, setSweepstakes] = useState([]);
@@ -11,19 +12,19 @@ export default function Sweepstakes(El) {
     const [purchasesFilter, setPurchasesFilter] = useState([]);
 
     useEffect(() => {
-        async function getSweepstakes() {
-            await El.socket.on('Sweepstakes', (res) => {
+        function getSweepstakes() {
+            El.socket.on('Sweepstakes', (res) => {
                 setSweepstakes(res.response);
             });
 
-            await El.socket.on('Purchases', (res) => {
+            El.socket.on('Purchases', (res) => {
                 setPurchases(res.response);
                 const filter = res.response.filter(person =>
                     person.CPF === El.auth.CPF
                 );
                 setPurchasesFilter(filter);
             });
-            
+
             El.socket.on('res_purchases', (res) => {
                 if (res.CPF === El.auth.CPF) {
                     setRes_purchases(res);
@@ -43,8 +44,8 @@ export default function Sweepstakes(El) {
         getSweepstakes();
     });
 
-
     async function sendPurchases(data) {
+        veryAuth(El.myId, El.setAuth, El.setAuthenticated);
         await api.post('/AddPurchases', data,
             El.storage.config).then(res => {
                 if (res.status === 200) {
@@ -66,9 +67,11 @@ export default function Sweepstakes(El) {
                     window.location.reload();
                 }
             })
+
     };
 
     async function sendImg(data) {
+        veryAuth(El.myId, El.setAuth, El.setAuthenticated);
         await api.post('/AddSweepstakes', {
             description: data.description,
             img: data.img,
@@ -84,6 +87,7 @@ export default function Sweepstakes(El) {
                 alert(res.data.message)
             }
         })
+
     };
     return {
         sendImg,

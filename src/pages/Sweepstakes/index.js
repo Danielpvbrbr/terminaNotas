@@ -25,7 +25,7 @@ export default function Sweepstakes({
   return (
     <Container >
       <h4>Sorteios</h4>
-      <AreaOption width={width < widthMax ? '82vw' : '550px'}>
+      <AreaOption width={width < widthMax ? '82vw' : '545px'}>
         <Option
           width={width < widthMax ? 102 : 115}
           onClick={() => setActive('Active')}
@@ -71,6 +71,7 @@ export default function Sweepstakes({
       {active === 'Add' ?
         <AddSweepstakes
           width={width}
+          widthMax={widthMax}
           AuthContext={AuthContext}
           data={dataRouter}
         />

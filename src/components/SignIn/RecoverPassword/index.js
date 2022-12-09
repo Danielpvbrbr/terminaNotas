@@ -5,7 +5,13 @@ import InputLabel from '../../InputLabel';
 import { BsFillTelephoneFill, BsLockFill } from "react-icons/bs";
 import ReactLoading from 'react-loading';
 
-export default function RecoverPassword({ setIsForm, width, AuthContext, setisRecovery }) {
+export default function RecoverPassword({
+  setIsForm,
+  width,
+  AuthContext,
+  setisRecovery,
+  widthMax
+}) {
   const { recoverPass, data_Codig, checking, msgErr, setMsgErr } = useContext(AuthContext);
   const [CPF, setCPF] = useState('');
   const [cod, setCod] = useState('');
@@ -77,8 +83,9 @@ export default function RecoverPassword({ setIsForm, width, AuthContext, setisRe
           label='Digite o CPF:'
           value={CPF}
           Icon={BsFillTelephoneFill}
-          width={width < 500 ? 70 : 27}
-          width2={width}//Modifica o tamanho do input
+          width={width < widthMax ? '55vw' : '340px'}
+          width2={width < widthMax ? '49vw' : '300px'}
+          widthMax={widthMax}
           placeholder='Ex: 999999999'
           maxLength={9}
           onChange={e => setCPF(e.target.value)}
@@ -91,8 +98,9 @@ export default function RecoverPassword({ setIsForm, width, AuthContext, setisRe
           label='Digite o codigo:'
           value={cod}
           Icon={BsFillTelephoneFill}
-          width={width < 500 ? 70 : 10}
-          width2={width}//Modifica o tamanho do input
+          width={width < widthMax ? '56vw' : '200px'}
+          width2={width < widthMax ? '50vw' : '157px'}//Modifica o tamanho do input
+          widthMax={widthMax}
           placeholder='Ex: 999999'
           maxLength={6}
           onChange={e => setCod(e.target.value)}
@@ -107,8 +115,8 @@ export default function RecoverPassword({ setIsForm, width, AuthContext, setisRe
             value={newPass}
             maxLength={8}
             Icon={BsLockFill}
-            width={width < 500 ? 70 : 27}
-            width2={width}//Modifica o tamanho do input
+            width={width < widthMax ? '56vw' : '370px'}
+            width2={width < widthMax ? '50vw' : '330px'}//Modifica o tamanho do input
             placeholder='Digite sua senha'
             onChange={e => setNewPass(e.target.value)}
             background='#fff'
@@ -120,8 +128,8 @@ export default function RecoverPassword({ setIsForm, width, AuthContext, setisRe
             value={conFPass}
             maxLength={8}
             Icon={BsLockFill}
-            width={width < 500 ? 70 : 27}
-            width2={width}//Modifica o tamanho do input
+            width={width < widthMax ? '56vw' : '370px'}
+            width2={width < widthMax ? '50vw' : '330px'}//Modifica o tamanho do input
             placeholder='Confirme a senha'
             onChange={e => setConFPass(e.target.value)}
             background='#fff'
@@ -134,8 +142,8 @@ export default function RecoverPassword({ setIsForm, width, AuthContext, setisRe
           label='Digite o CPF:'
           value={CPF}
           Icon={BsFillTelephoneFill}
-          width={width < 500 ? 70 : 27}
-          width2={width}//Modifica o tamanho do input
+          width={width < widthMax ? '56vw' : '370px'}
+          width2={width < widthMax ? '50vw' : '330px'}//Modifica o tamanho do input
           placeholder='Ex: 999999999'
           maxLength={8}
           onChange={e => setCPF(e.target.value)}
@@ -154,7 +162,7 @@ export default function RecoverPassword({ setIsForm, width, AuthContext, setisRe
 
   return (
     <Container>
-      <AreaForm width={width < 500 ? 80 : 30}>
+      <AreaForm width={width < widthMax ? '62vw' : '400px'}>
         <header>
           <h4>Esqueci minha senha!</h4>
           <BsX

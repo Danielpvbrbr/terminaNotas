@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Container, LineOption } from './styles';
-import { BsChevronCompactDown, BsChevronCompactRight } from "react-icons/bs";
+// import { BsChevronCompactDown, BsChevronCompactRight } from "react-icons/bs";
 
 export default function Doubt({ width, widthMax }) {
-  const [isActive, setIsActive] = useState(0)
+  // const [isActive, setIsActive] = useState(0)
 
   const array = [{
     id: 1,
@@ -28,7 +28,7 @@ export default function Doubt({ width, widthMax }) {
       {array.map((v, i) =>
         <LineOption
           key={i}
-          width={width < widthMax ? '82vw' : '550px'}
+          width={width < widthMax ? '82vw' : '545px'}
         >
           <section>
             <h3>{v.title}</h3>

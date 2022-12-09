@@ -4,7 +4,7 @@ import Fone from '../../Img/fone.jpg';
 import Rig from '../../Img/rig.jpg';
 import AreaUsers from '../../components/AreaUsers';
 
-export default function UserList({ width, widthMax }) {
+export default function UserList({ width, widthMax, AuthContext }) {
   let pub = [
     {
       id: 0,
@@ -36,6 +36,7 @@ export default function UserList({ width, widthMax }) {
           data={v}
           width={width}
           widthMax={widthMax}
+          AuthContext={AuthContext}
         />
       )}
 

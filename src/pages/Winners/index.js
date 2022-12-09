@@ -42,7 +42,7 @@ export default function Winners({ width, widthMax }) {
             title={v.name}
             desc={v.desc}
             cota={v.cota}
-            width={width < widthMax ? '82vw' : '550px'}
+            width={width < widthMax ? '82vw' : '545px'}
             height={63}
           />
         </span>

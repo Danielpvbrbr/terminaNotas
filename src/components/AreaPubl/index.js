@@ -25,7 +25,7 @@ export default function ProdutoView({
   };
 
   return (
-    <Container width={width < widthMax ? '82vw' : '550px'}>
+    <Container width={width < widthMax ? '82vw' : '545px'}>
       <img src={`data:image/jpeg;base64,${data.img}`} alt='imgCentral' />
       <div>
         <h4>{data.title}</h4>

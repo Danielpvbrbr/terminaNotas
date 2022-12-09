@@ -39,23 +39,22 @@ export default function ViewProduct({ dataRouter, width, AuthContext, widthMax }
   return (
     <Container>
       <h4>Produto</h4>
-      <ProdutoView dataRouter={dataRouter} width={width < widthMax ? '87vw' : '550px'} widthMax={widthMax}/>
+      <ProdutoView dataRouter={dataRouter} width={width < widthMax ? '87vw' : '545px'} widthMax={widthMax}/>
       {dataRouter.status === 'Active' &&
-        <Area width={width < widthMax ? '87vw' : '550px'}>
+        <Area width={width < widthMax ? '87vw' : '545px'}>
           <h3>Selecione a quantidade de números</h3>
           <AreaAdd
             btnValue={btnValue}
             setbtnValue={setbtnValue}
-            width={width < widthMax ? '84vw' : '538px'}
+            width={width < widthMax ? '84vw' : '530px'}
             height={width < widthMax ? 150 : 100}
           />
-
           <InputNumber
             btnValue={btnValue}
             setbtnValue={setbtnValue}
           />
           {!(auth.privilege) &&
-            <BtnFinishing width={width < widthMax ? '84vw' : '535px'} onClick={Purchases}>
+            <BtnFinishing width={width < widthMax ? '84vw' : '530px'} onClick={Purchases}>
               <span />
               <h2>Finalizar</h2>
               <p>{CvrtReal(dataRouter, btnValue)}</p>

@@ -49,8 +49,9 @@ export default function Menu({
                     }
                     <li onClick={() => setRoute('/Doubt')} style={{ color: route === '/Doubt' ? '#00A3FF' : '#fff' }}>Dúvida</li>
                     <li onClick={() => setRoute('/MyAccount')} style={{ color: route === '/MyAccount' ? '#00A3FF' : '#fff' }}>Minha conta</li>
-                    
-                    {!signed &&
+
+
+                    {!signed && width < 950 &&
                         <li onClick={() => setIsForm(true)} style={{
                             color: '#fff',
                             background: '#00A3FF',
@@ -61,7 +62,6 @@ export default function Menu({
 
                         }}>Acessar</li>
                     }
-
                 </ul>
             }
         </Container>

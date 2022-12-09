@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useState, useEffect } from 'react';
 import api from '../../services/api';
+import veryAuth from '../veryAuth';
 
 export default function userAuth(EL) {
     const [authenticated, setAuthenticated] = useState(false);
@@ -12,7 +13,10 @@ export default function userAuth(EL) {
     const [isSignUp, setIsSignUp] = useState(false);
     const [data_Codig, setData_Codig] = useState([]);
     const [checking, setChecking] = useState(false);
-    const [msgErr, setMsgErr] = useState('');
+    const [msgErr, setMsgErr] = useState({
+        err: false,
+        message: ''
+    });
 
     useEffect(() => {
         if (EL.storage.myToken) {
@@ -37,7 +41,11 @@ export default function userAuth(EL) {
                         const { isAuth } = err.response.data;
                         if (!isAuth) {
                             console.log('Deslogar');
-                            // signOut();
+                            setAuth([])
+                            localStorage.clear();
+                            setAuthenticated(false);
+                            api.defaults.headers.common['x-access-token'] = undefined;
+                            api.post('/logout');
                         };
                     });
 
@@ -47,7 +55,7 @@ export default function userAuth(EL) {
             };
         };
         Auth();
-    }, [myId, leading, EL.socket, auth.CPF]);
+    }, [EL.socket, leading, myId]);
 
 
     async function signIn(data) {
@@ -105,12 +113,13 @@ export default function userAuth(EL) {
     };
 
     async function updUsersAddres(data) {
+        veryAuth(myId, setAuth, setAuthenticated);
+
         setChecking(true);
         await api.post('/updUsersAddres', data)
             .then(res => {
                 setChecking(false);
                 if (res.status === 200) {
-                    console.log(res)
                     setMsgErr({
                         err: false,
                         message: res.data.message
@@ -122,9 +131,11 @@ export default function userAuth(EL) {
                     });
                 }
             })
-    };
+    }
+
 
     function recoverPass(res) {
+        veryAuth(myId, setAuth, setAuthenticated)
         setChecking(true);
         setMsgErr('');
         api.post('/RecoverPassword', {
@@ -182,7 +193,9 @@ export default function userAuth(EL) {
         msgErr,
         setMsgErr,
         fullUser,
-        updUsersAddres
+        updUsersAddres,
+        setAuth,
+        setAuthenticated
     }
 
 }

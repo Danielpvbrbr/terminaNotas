@@ -33,7 +33,7 @@ export default function App({
       <span>
         {isIcon &&
           <Icon
-            size={20}
+            size={18}
             color='#B7B7B7'
             cursor='pointer'
           />

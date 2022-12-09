@@ -48,7 +48,10 @@ export default function AuthProvider({ children }) {
         msgErr,
         setMsgErr,
         fullUser,
-        updUsersAddres
+        updUsersAddres,
+        myId,
+        setAuth,
+        setAuthenticated
     } = userAuth({ storage, socket });
 
     const {
@@ -61,7 +64,15 @@ export default function AuthProvider({ children }) {
         setConfirmPurchases,
         qrCode,
         res_purchases
-    } = Sweepstakes({ storage, socket, auth });
+    } = Sweepstakes({
+        storage,
+        socket,
+        auth,
+        authenticated,
+        myId,
+        setAuth,
+        setAuthenticated
+    });
 
     return (
         <AuthContext.Provider value={{

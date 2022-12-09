@@ -1,9 +1,19 @@
 import React, { useState, useContext } from 'react';
-import { Container, Area, AreaUpload, AreaDesc, Status, Button, AreaOption } from './styles';
+import {
+  Container,
+  Area,
+  AreaUpload,
+  AreaDesc,
+  Status,
+  Preview,
+  Button,
+  AreaOption,
+  AreaText
+} from './styles';
 import { BsImage, BsFillTelephoneFill } from "react-icons/bs";
 import InputLabel from '../../components/InputLabel';
 
-export default function AddSweepstakes({ width, AuthContext, data }) {
+export default function AddSweepstakes({ width, AuthContext, data, widthMax }) {
   const { sendImg, purchasesFilter } = useContext(AuthContext);
   const [title, setTitle] = useState(data.title || '');
   const [description, setDescription] = useState(data.description || '');
@@ -50,46 +60,70 @@ export default function AddSweepstakes({ width, AuthContext, data }) {
     setCota(v);
     const winner = purchasesFilter.filter(person => person.id_award === data.id);
     // const filter = winner.filter(person =>  person.numbers_cota === v);
-
-    console.log(winner.numbers_cota);
     setFilterWinner(winner);
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = (type) => {
     const imgBase64 = (img.split('').splice(23, img.length).join(''))
 
-    if (
-      title.length
-      &&
-      description.length
-      &&
-      status.length
-      &&
-      img.length
-      &&
-      price > 0
-    ) {
-      sendImg({
-        title: title,
-        description: description,
-        price: price,
-        status: status,
-        img: imgBase64
-      })
-    } else {
-      alert('E nescessario o preenchimento dos campos.')
-    }
+    console.log({
+      newPublication: type,
+      title: title,
+      description: description,
+      price: price,
+      status: status,
+      img: imgBase64
+    })
+    // if (
+    //   title.length
+    //   &&
+    //   description.length
+    //   &&
+    //   status.length
+    //   &&
+    //   img.length
+    //   &&
+    //   price > 0
+    // ) {
+    //   sendImg({
+    //     title: title,
+    //     description: description,
+    //     price: price,
+    //     status: status,
+    //     img: imgBase64
+    //   })
+    // } else {
+    //   alert('E nescessario o preenchimento dos campos.')
+    // }
+  };
+
+  const formatMoney = (value) => {
+    // value = value + '';
+    // value = parseInt(value.replace(/[\D]+/g, ''));
+    // value = value + '';
+    // value = value.replace(/([0-9]{2})$/g, ",$1");
+
+    // if (value.value > 6) {
+    //   value = value.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$0");
+    // }
+
+    // if(value === 'NaN') value = '';
+    setPrice(value)
   };
 
   return (
     <Container>
-      <Area width={width < 500 ? 90 : 40} >
-        <AreaUpload width={width < 500 ? 88 : 37.5}>
+      <Area width={width < widthMax ? '82vw' : '545px'} >
+        <AreaUpload width={width < widthMax ? '82vw' : '530px'}>
           <section>
             {img === '' ?
               <BsImage size={50} color='#00A3FF' />
               :
-              <img src={data.img ? `data:image/jpeg;base64,${data.img}` : img} alt='fone' />
+              <Preview 
+              src={data.img ? `data:image/jpeg;base64,${data.img}` : img} 
+              alt='fone' 
+              width={width < widthMax ? '80vw' : '518px'}
+              />
             }
           </section>
 
@@ -100,7 +134,7 @@ export default function AddSweepstakes({ width, AuthContext, data }) {
           />
         </AreaUpload>
 
-        <AreaDesc width={width < 500 ? 88 : 37.5}>
+        <AreaDesc width={width < widthMax ? '82vw' : '535px'}>
           <InputLabel
             type='text'
             onChange={e => setTitle(e.target.value)}
@@ -108,29 +142,33 @@ export default function AddSweepstakes({ width, AuthContext, data }) {
             placeholder='Digite o titulo da publicação..'
             label='Título:'
             disabled={data.status === 'Concluded'}
+            maxLength={120}
             Icon={BsFillTelephoneFill}
-            width={width < 500 ? 86 : 36.5}
+            width={width < widthMax ? '80vw' : '520px'}
+            width2={width < widthMax ? '70vw' : '520px'}//Modifica o tamanho do input
             background='#fff'
-            isIcon={false}
+            isIcon={true}
           />
           <InputLabel
             type='number'
-            onChange={e => setPrice(e.target.value)}
+            onChange={e => formatMoney(e.target.value)}
             value={price}
             placeholder='0'
             label='Preço:'
             disabled={data.status === 'Concluded'}
             Icon={BsFillTelephoneFill}
-            width={width < 500 ? 13 : 6}
+            width={width < widthMax ? '30vw' : '90px'}
+            width2={width < widthMax ? '20vw' : '45px'}//Modifica o tamanho do input
             background='#fff'
-            isIcon={false}
+            isIcon={true}
           />
           <p>Descrição:</p>
-          <textarea
+          <AreaText
             id="story"
             name="story"
             rows="10"
-            cols="33"
+            cols="520"
+            width={width < widthMax ? '80vw' : '520px'}
             disabled={data.status === 'Concluded'}
             value={description}
             onChange={e => setDescription(e.target.value)}
@@ -140,7 +178,7 @@ export default function AddSweepstakes({ width, AuthContext, data }) {
             disabled={data.status === 'Concluded'}
             defaultValue={status}
             onChange={e => onSelect(e.target.value)}
-            width={width < 500 ? 86 : 10}
+            width={width < widthMax ? '20vw' : '90px'}
           >
             <option value="DEFAULT" disabled>Status ...</option>
             <option value='Active'>Ativo</option>
@@ -151,7 +189,7 @@ export default function AddSweepstakes({ width, AuthContext, data }) {
           </Status>
 
           {status === 'Concluded' &&
-            <AreaOption width={width < 500 ? 88 : 36.8}>
+            <AreaOption width={width < widthMax ? '80vw' : '520px'}>
               <h4>Informações do ganhador</h4>
               <InputLabel
                 type='number'
@@ -161,10 +199,11 @@ export default function AddSweepstakes({ width, AuthContext, data }) {
                 label='Digite a cota sorteada:'
                 disabled={data.status === 'Concluded'}
                 Icon={BsFillTelephoneFill}
-                width={width < 500 ? 13 : 15}
+                width={width < widthMax ? '30vw' : '90px'}
+                width2={width < widthMax ? '21vw' : '45px'}//Modifica o tamanho do input
                 background='#00A3FF'
                 color='#fff'
-                isIcon={false}
+                isIcon={true}
               />
               {
                 filterWinner.map((v, i) =>
@@ -184,12 +223,37 @@ export default function AddSweepstakes({ width, AuthContext, data }) {
         </AreaDesc>
         {data.img ?
           <>
-            <Button bg='#d5d5d5' width={width < 500 ? 86.7 : 37} onClick={handleClear}>Limpar</Button>
-            <Button disabled={data.status === 'Concluded'} bg={data.status === 'Concluded' ? '#d5d5d5' : '#00A3FF'} width={width < 500 ? 86.7 : 37} onClick={() => alert('Atualizado')}>Atualizar</Button>
-            <Button bg='#ea777b' width={width < 500 ? 86.7 : 37} onClick={() => alert('Deletado')}>Deletar</Button>
+            <Button
+              bg='#d5d5d5'
+              width={width < widthMax ? '80vw' : '520px'}
+              onClick={handleClear}
+            >
+              Limpar
+            </Button>
+            <Button
+              disabled={data.status === 'Concluded'}
+              bg={data.status === 'Concluded' ? '#d5d5d5' : '#00A3FF'}
+              width={width < widthMax ? '80vw' : '520px'}
+              onClick={() => handleSubmit(false)}
+            >
+              Atualizar
+            </Button>
+            <Button
+              bg='#ea777b'
+              width={width < widthMax ? '80vw' : '520px'}
+              onClick={() => alert('Deletado')}
+            >
+              Deletar
+            </Button>
           </>
           :
-          <Button bg='#78A55A' width={width < 500 ? 86.7 : 37} onClick={handleSubmit}>Publicar</Button>
+          <Button
+            bg='#78A55A'
+            width={width < widthMax ? '80vw' : '520px'}
+            onClick={() => handleSubmit(true)}
+          >
+            Publicar
+          </Button>
         }
       </Area>
     </Container>
