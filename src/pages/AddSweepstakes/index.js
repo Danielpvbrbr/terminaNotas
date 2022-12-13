@@ -8,20 +8,27 @@ import {
   Preview,
   Button,
   AreaOption,
-  AreaText
+  AreaText,
+  List
 } from './styles';
-import { BsImage, BsFillTelephoneFill } from "react-icons/bs";
+import { BsImage, BsFillTrophyFill, BsCurrencyDollar, BsTextareaT } from "react-icons/bs";
 import InputLabel from '../../components/InputLabel';
 
 export default function AddSweepstakes({ width, AuthContext, data, widthMax }) {
-  const { sendImg, purchasesFilter } = useContext(AuthContext);
+  const {
+    addSweepstakes,
+    addWinners,
+    purchasesFilter,
+    seachPurchases,
+    filterWinner
+  } = useContext(AuthContext);
   const [title, setTitle] = useState(data.title || '');
   const [description, setDescription] = useState(data.description || '');
   const [price, setPrice] = useState(data.price || 0);
   const [status, setStatus] = useState(data.status || 'DEFAULT');
   const [img, setImg] = useState(data.img || '');
   const [cota, setCota] = useState(0);
-  const [filterWinner, setFilterWinner] = useState([]);
+  const [selected, setSelected] = useState("");
 
   const onChange = (e) => {
     if (e.target.files.length <= 0) {
@@ -56,24 +63,14 @@ export default function AddSweepstakes({ width, AuthContext, data, widthMax }) {
     setStatus(res);
   };
 
-  const onChangeCota = (v) => {
-    setCota(v);
-    const winner = purchasesFilter.filter(person => person.id_award === data.id);
-    // const filter = winner.filter(person =>  person.numbers_cota === v);
-    setFilterWinner(winner);
+  const onChangeCota = (filter) => {
+    setCota(filter);
+    seachPurchases(data.id, filter);
   }
 
   const handleSubmit = (type) => {
-    const imgBase64 = (img.split('').splice(23, img.length).join(''))
+    const imgBase64 = (img.split('').splice(23, img.length).join(''));
 
-    console.log({
-      newPublication: type,
-      title: title,
-      description: description,
-      price: price,
-      status: status,
-      img: imgBase64
-    })
     // if (
     //   title.length
     //   &&
@@ -85,16 +82,60 @@ export default function AddSweepstakes({ width, AuthContext, data, widthMax }) {
     //   &&
     //   price > 0
     // ) {
-    //   sendImg({
-    //     title: title,
-    //     description: description,
-    //     price: price,
-    //     status: status,
-    //     img: imgBase64
-    //   })
+    //   
     // } else {
     //   alert('E nescessario o preenchimento dos campos.')
     // }
+
+    if (status === "Concluded") {
+      // addWinners({
+      //   newPublication: type,
+      //   title: title,
+      //   description: description,
+      //   price: price,
+      //   status: status,
+      //   img: imgBase64
+      // })
+      console.log({
+        newPublication: type,
+        title: title,
+        description: description,
+        price: price,
+        status: status,
+        img: imgBase64
+      })
+    } else if (status === "Active") {
+      console.log({
+        newPublication: type,
+        title: title,
+        description: description,
+        price: price,
+        status: status,
+        img: imgBase64
+      })
+      // addSweepstakes({
+      //   title: title,
+      //   description: description,
+      //   price: price,
+      //   status: status,
+      //   img: imgBase64
+      // })
+
+    }
+  };
+
+  const handleSeleceted = (v, i) => {
+    setSelected(i);
+    console.log({
+      name: v.buyer,
+      CPF: v.CPF,
+      phone: v.phone,
+      date: "",
+      cota: cota,
+      award: v.award,
+      img: v.img
+    })
+
   };
 
   const formatMoney = (value) => {
@@ -110,7 +151,8 @@ export default function AddSweepstakes({ width, AuthContext, data, widthMax }) {
     // if(value === 'NaN') value = '';
     setPrice(value)
   };
-
+  console.log(cota > 0 && cota !== "")
+  console.log(cota.length)
   return (
     <Container>
       <Area width={width < widthMax ? '82vw' : '545px'} >
@@ -119,10 +161,10 @@ export default function AddSweepstakes({ width, AuthContext, data, widthMax }) {
             {img === '' ?
               <BsImage size={50} color='#00A3FF' />
               :
-              <Preview 
-              src={data.img ? `data:image/jpeg;base64,${data.img}` : img} 
-              alt='fone' 
-              width={width < widthMax ? '80vw' : '518px'}
+              <Preview
+                src={data.img ? `data:image/jpeg;base64,${data.img}` : img}
+                alt='fone'
+                width={width < widthMax ? '80vw' : '518px'}
               />
             }
           </section>
@@ -143,9 +185,9 @@ export default function AddSweepstakes({ width, AuthContext, data, widthMax }) {
             label='Título:'
             disabled={data.status === 'Concluded'}
             maxLength={120}
-            Icon={BsFillTelephoneFill}
+            Icon={BsTextareaT}
             width={width < widthMax ? '80vw' : '520px'}
-            width2={width < widthMax ? '70vw' : '520px'}//Modifica o tamanho do input
+            width2={width < widthMax ? '70vw' : '465px'}//Modifica o tamanho do input
             background='#fff'
             isIcon={true}
           />
@@ -156,9 +198,9 @@ export default function AddSweepstakes({ width, AuthContext, data, widthMax }) {
             placeholder='0'
             label='Preço:'
             disabled={data.status === 'Concluded'}
-            Icon={BsFillTelephoneFill}
-            width={width < widthMax ? '30vw' : '90px'}
-            width2={width < widthMax ? '20vw' : '45px'}//Modifica o tamanho do input
+            Icon={BsCurrencyDollar}
+            width={width < widthMax ? '30vw' : '120px'}
+            width2={width < widthMax ? '20vw' : '65px'}//Modifica o tamanho do input
             background='#fff'
             isIcon={true}
           />
@@ -196,27 +238,31 @@ export default function AddSweepstakes({ width, AuthContext, data, widthMax }) {
                 onChange={e => onChangeCota(e.target.value)}
                 value={cota}
                 placeholder='0'
-                label='Digite a cota sorteada:'
+                label='Cota Sorteada:'
                 disabled={data.status === 'Concluded'}
-                Icon={BsFillTelephoneFill}
-                width={width < widthMax ? '30vw' : '90px'}
-                width2={width < widthMax ? '21vw' : '45px'}//Modifica o tamanho do input
+                Icon={BsFillTrophyFill}
+                width={width < widthMax ? '30vw' : '120px'}
+                width2={width < widthMax ? '20vw' : '70px'}//Modifica o tamanho do input
                 background='#00A3FF'
                 color='#fff'
                 isIcon={true}
               />
-              {
+              {cota > 0 && cota !== "" &&
                 filterWinner.map((v, i) =>
-                  <section key={i} onClick={() => alert(v.buyer)}>
+                  <List key={i} onClick={() => handleSeleceted(v, i)} color={selected === i ? "#226c91" : "#00A3FF"}>
                     <p>Comprador: <span>{v.buyer}</span></p>
                     <p>CPF: <span>{v.CPF}</span></p>
                     <p>Telefone: <span>{v.phone}</span></p>
-                    <p>Total de cotas compradas: <span>20</span></p>
-                    <p>Cota premiada: <span>223</span></p>
-                  </section>
+                    <p>Total de cotas compradas: <span>{v.qtd}</span></p>
+                    <p>Contas: <span>{
+                      v.numbers_cota.map((v, i) =>
+                        // eslint-disable-next-line react/style-prop-object
+                        <h3 style={{ color: v === cota && "#ff0000" }}>{v}</h3>
+                      )
+                    }</span></p>
+                  </List>
                 )
               }
-
             </AreaOption>
           }
 
@@ -230,14 +276,26 @@ export default function AddSweepstakes({ width, AuthContext, data, widthMax }) {
             >
               Limpar
             </Button>
-            <Button
-              disabled={data.status === 'Concluded'}
-              bg={data.status === 'Concluded' ? '#d5d5d5' : '#00A3FF'}
-              width={width < widthMax ? '80vw' : '520px'}
-              onClick={() => handleSubmit(false)}
-            >
-              Atualizar
-            </Button>
+            {(cota > 0 && cota !== "" && selected !== "" && status === "Concluded") &&
+              <Button
+                disabled={data.status === 'Concluded'}
+                bg={data.status === 'Concluded' ? '#d5d5d5' : '#00A3FF'}
+                width={width < widthMax ? '80vw' : '520px'}
+                onClick={() => handleSubmit(false)}
+              >
+                Encerrar Sorteio
+              </Button>
+            }
+            {(status === "Active") &&
+              <Button
+                disabled={data.status === 'Concluded'}
+                bg={data.status === 'Concluded' ? '#d5d5d5' : '#00A3FF'}
+                width={width < widthMax ? '80vw' : '520px'}
+                onClick={() => handleSubmit(false)}
+              >
+                Atualizar Sorteio
+              </Button>
+            }
             <Button
               bg='#ea777b'
               width={width < widthMax ? '80vw' : '520px'}

@@ -84,6 +84,7 @@ export const AreaOption = styled.div`
         border-radius:5px ;
         padding:5px ;
         background-color:#00A3FF ;
+        margin-left:3px ;
 
         h4{
             color:#fff ;
@@ -94,7 +95,8 @@ export const AreaOption = styled.div`
         section{
             width:${props => props.width - 1};
             margin-top:2px ;
-            border-top:1px solid #c2c9d6 ;   
+            border-top:1px solid #c2c9d6 ; 
+            cursor: pointer;  
         }
         p{
             color:#fff ;
@@ -106,8 +108,22 @@ export const AreaOption = styled.div`
             font-size:11pt ;
             font-weight:300
         }
+        section h3{
+            color:#fff ;
+            font-size:11pt ;
+            font-weight:600;
+            display: inline;
+            
+        }
 `;
-
+export const List = styled.section`
+            width:${props => props.width - 1};
+            margin-top:2px ;
+            border-top:1px solid #c2c9d6 ; 
+            cursor: pointer;  
+            background-color:${props => props.color};
+            padding:4px ;
+`;
 export const Status = styled.select`
         width:${props => props.width};
         height:30px ; 

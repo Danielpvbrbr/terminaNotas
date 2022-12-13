@@ -113,29 +113,29 @@ export default function userAuth(EL) {
     };
 
     async function updUsersAddres(data) {
-        veryAuth(myId, setAuth, setAuthenticated);
+        if (veryAuth(myId, setAuth, setAuthenticated)) {
 
-        setChecking(true);
-        await api.post('/updUsersAddres', data)
-            .then(res => {
-                setChecking(false);
-                if (res.status === 200) {
-                    setMsgErr({
-                        err: false,
-                        message: res.data.message
-                    });
-                } else {
-                    setMsgErr({
-                        err: true,
-                        message: res.data.message
-                    });
-                }
-            })
+            setChecking(true);
+            await api.post('/updUsersAddres', data)
+                .then(res => {
+                    setChecking(false);
+                    if (res.status === 200) {
+                        setMsgErr({
+                            err: false,
+                            message: res.data.message
+                        });
+                    } else {
+                        setMsgErr({
+                            err: true,
+                            message: res.data.message
+                        });
+                    }
+                })
+        };
     }
 
 
     function recoverPass(res) {
-        veryAuth(myId, setAuth, setAuthenticated)
         setChecking(true);
         setMsgErr('');
         api.post('/RecoverPassword', {
@@ -165,6 +165,7 @@ export default function userAuth(EL) {
             });
             setChecking(false);
         })
+
     };
 
     async function signOut() {

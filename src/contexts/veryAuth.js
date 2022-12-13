@@ -1,14 +1,16 @@
 import api from '../services/api';
 
 export default async function veryAuth(myId, setAuth, setAuthenticated) {
+    let isToken = false
     await api.post('/auth', { id: myId })
         .then(res => {
             setAuth(res.data);
+            isToken = true;
         }).catch(err => {
             const { isAuth } = err.response.data;
             if (!isAuth) {
+                isToken = false;
                 alert('Acesso Expirado, Favor autenticar novamente')
-                console.log('Deslogar');
                 setAuth([])
                 localStorage.clear();
                 setAuthenticated(false);
@@ -17,4 +19,7 @@ export default async function veryAuth(myId, setAuth, setAuthenticated) {
                 window.location.reload();
             };
         });
+
+    return isToken
+
 };

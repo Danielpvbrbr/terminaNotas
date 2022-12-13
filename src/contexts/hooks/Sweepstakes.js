@@ -10,6 +10,7 @@ export default function Sweepstakes(El) {
     const [res_purchases, setRes_purchases] = useState([]);
     const [qrCode, setqrCode] = useState([]);
     const [purchasesFilter, setPurchasesFilter] = useState([]);
+    const [filterWinner, setFilterWinner] = useState([]);
 
     useEffect(() => {
         function getSweepstakes() {
@@ -43,62 +44,102 @@ export default function Sweepstakes(El) {
         };
         getSweepstakes();
     });
-
-    async function sendPurchases(data) {
-        veryAuth(El.myId, El.setAuth, El.setAuthenticated);
-        await api.post('/AddPurchases', data,
-            El.storage.config).then(res => {
-                if (res.status === 200) {
-                    const value = res.data.response;
-                    setqrCode({
-                        base64: value.base64,
-                        description: value.description,
-                        id_purchases: value.id_purchases,
-                        qr_code: value.qr_code,
-                        status: value.status,
-                        qtd: value.qtd,
-                        price: value.price,
-                        priceUnd: value.priceUnd,
-                    })
-                    setConfirmPurchases(true);
-                    // window.location.reload();
-                } else {
-                    alert(res.data.message);
-                    window.location.reload();
-                }
+    async function seachPurchases(id, filter) {
+        if (veryAuth(El.myId, El.setAuth, El.setAuthenticated)) {
+            await api.post('/seachPurchases', {
+                id: id,
+                filter: filter
+            }).then(res => {
+                setFilterWinner(res.data);
             })
 
-    };
-
-    async function sendImg(data) {
-        veryAuth(El.myId, El.setAuth, El.setAuthenticated);
-        await api.post('/AddSweepstakes', {
-            description: data.description,
-            img: data.img,
-            price: data.price,
-            status: data.status,
-            title: data.title,
-            qtd: data.qtd
-        }, El.storage.config).then(res => {
-            if (res.status === 200) {
-                alert(res.data.message);
-                window.location.reload()
-            } else {
-                alert(res.data.message)
-            }
-        })
+        };
 
     };
+
+    async function sendPurchases(data) {
+
+        if (veryAuth(El.myId, El.setAuth, El.setAuthenticated)) {
+            await api.post('/AddPurchases', data,
+                El.storage.config).then(res => {
+                    if (res.status === 200) {
+                        const value = res.data.response;
+                        setqrCode({
+                            base64: value.base64,
+                            description: value.description,
+                            id_purchases: value.id_purchases,
+                            qr_code: value.qr_code,
+                            status: value.status,
+                            qtd: value.qtd,
+                            price: value.price,
+                            priceUnd: value.priceUnd,
+                        })
+                        setConfirmPurchases(true);
+                        // window.location.reload();
+                    } else {
+                        alert(res.data.message);
+                        window.location.reload();
+                    }
+                })
+        };
+
+    };
+
+    async function addSweepstakes(data) {
+        if (veryAuth(El.myId, El.setAuth, El.setAuthenticated)) {
+            await api.post('/AddSweepstakes', {
+                description: data.description,
+                img: data.img,
+                price: data.price,
+                status: data.status,
+                title: data.title,
+                qtd: data.qtd
+            }, El.storage.config).then(res => {
+                if (res.status === 200) {
+                    alert(res.data.message);
+                    window.location.reload()
+                } else {
+                    alert(res.data.message)
+                }
+            })
+        };
+    };
+
+    async function addWinners(data) {
+        if (veryAuth(El.myId, El.setAuth, El.setAuthenticated)) {
+            console.log(addWinners)
+            // if()
+            // await api.post('/AddSweepstakes', {
+            //     description: data.description,
+            //     img: data.img,
+            //     price: data.price,
+            //     status: data.status,
+            //     title: data.title,
+            //     qtd: data.qtd
+            // }, El.storage.config).then(res => {
+            //     if (res.status === 200) {
+            //         alert(res.data.message);
+            //         window.location.reload()
+            //     } else {
+            //         alert(res.data.message)
+            //     }
+            // })
+        };
+    };
+
     return {
-        sendImg,
+        addSweepstakes,
         sweepstakes,
         purchases,
         sendPurchases,
         purchasesFilter,
+        seachPurchases,
         confirmPurchases,
         setConfirmPurchases,
         qrCode,
-        res_purchases
+        res_purchases,
+        addWinners,
+        filterWinner
     }
 
 }

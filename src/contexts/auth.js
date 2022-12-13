@@ -55,15 +55,18 @@ export default function AuthProvider({ children }) {
     } = userAuth({ storage, socket });
 
     const {
-        sendImg,
+        addSweepstakes,
         sweepstakes,
         purchases,
         sendPurchases,
         purchasesFilter,
+        seachPurchases,
         confirmPurchases,
         setConfirmPurchases,
         qrCode,
-        res_purchases
+        res_purchases,
+        addWinners,
+        filterWinner
     } = Sweepstakes({
         storage,
         socket,
@@ -85,11 +88,12 @@ export default function AuthProvider({ children }) {
             setIsSignIn,
             isSignUp,
             setIsSignUp,
-            sendImg,
+            addSweepstakes,
             sweepstakes,
             sendPurchases,
             purchases,
             purchasesFilter,
+            seachPurchases,
             confirmPurchases,
             setConfirmPurchases,
             qrCode,
@@ -100,7 +104,9 @@ export default function AuthProvider({ children }) {
             msgErr,
             setMsgErr,
             fullUser,
-            updUsersAddres
+            updUsersAddres,
+            addWinners,
+            filterWinner
         }}>
             {children}
 
