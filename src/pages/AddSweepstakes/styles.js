@@ -49,7 +49,7 @@ export const AreaUpload = styled.section`
     border:1px solid ;
 
     section{
-        width:${props => props.width - 1};
+        width:100%;
         height:30vh ;
         display:flex ;
         flex-direction:column ;

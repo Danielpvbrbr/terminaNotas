@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
-import { Container, AreaForm, Info, Details, DetailsPurchase, AreaButton, QrCode } from './styles';
+import { Container, AreaForm, Info, Details, DetailsPurchase, AreaButton, QrCode,AreaQr, InputCopy } from './styles';
 import { BsX } from "react-icons/bs";
-import InputLabel from '../InputLabel';
+// import InputLabel from '../InputLabel';
 import { BsFiles, BsLockFill } from "react-icons/bs";
 import ConvertReal from '../../components/ConvertReal';
 
@@ -27,6 +27,7 @@ export default function ConfirmPurchase({ width, widthMax, AuthContext }) {
     return timeString
   }
 
+
   return (
     <Container>
       <AreaForm width={width < widthMax ? 80 : 30}>
@@ -50,26 +51,20 @@ export default function ConfirmPurchase({ width, widthMax, AuthContext }) {
           <p>Código QR</p>
           <QrCode src={`data:image/png;base64,${qrCode && qrCode.base64}`} alt={'dd'} />
 
-          <span>
-            <InputLabel
+          <AreaQr width={width < widthMax ? 75 : 28}>
+            <InputCopy
               type='text'
-              label='Código de pagamento:'
               value={qrCode && qrCode.qr_code}
-              maxLength={8}
-              Icon={BsLockFill}
-              width={width < widthMax ? 70 : 24}
-              width2={width}//Modifica o tamanho do input
-              background='#fff'
-              isIcon={false}
               readOnly={true}
+              width={width < widthMax ? 70 : 25.6}
             />
             <BsFiles
-              size={26}
+              size={24}
               color='#779FE5'
               cursor='pointer'
               onClick={() => copyToClipboard(qrCode.qr_code)}
             />
-          </span>
+          </AreaQr>
         </section>
         <Details width={width < widthMax ? 80 : 28}>
           <h2>Como pagar?</h2>

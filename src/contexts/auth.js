@@ -66,7 +66,9 @@ export default function AuthProvider({ children }) {
         qrCode,
         res_purchases,
         addWinners,
-        filterWinner
+        filterWinner,
+        deleteSweepstakes,
+        winners
     } = Sweepstakes({
         storage,
         socket,
@@ -74,7 +76,7 @@ export default function AuthProvider({ children }) {
         authenticated,
         myId,
         setAuth,
-        setAuthenticated
+        setAuthenticated,
     });
 
     return (
@@ -106,7 +108,9 @@ export default function AuthProvider({ children }) {
             fullUser,
             updUsersAddres,
             addWinners,
-            filterWinner
+            filterWinner,
+            deleteSweepstakes,
+            winners
         }}>
             {children}
 

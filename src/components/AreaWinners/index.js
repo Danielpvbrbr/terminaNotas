@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Container,
   Logo,
@@ -32,19 +32,21 @@ const data = [
     cota: '00003'
   }
 ];
-export default function AreaWinners() {
+export default function AreaWinners({ AuthContext }) {
+  const {winners } = useContext(AuthContext);
+
   return (
     <Container>
       <Logo src={logo} alt='logo' />
       <AreaLeft>
         <h4>Ganhadores</h4>
         <ListWinners>
-          {data.map((v, i) =>
+          {winners.map((v, i) =>
             <LineWinners
               key={i}
               img={v.img}
-              title={v.title}
-              desc={v.desc}
+              title={v.name}
+              desc={v.award}
               cota={v.cota}
               width={14}
               height={63}

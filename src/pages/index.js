@@ -169,17 +169,18 @@ export default function App() {
                     setActive={setActive}
                 />
             }
-            {confirmPurchases &&
+            { //confirmPurchases  
+                confirmPurchases &&
                 <ConfirmPurchase
                     width={width}
                     widthMax={widthMax}
                     AuthContext={AuthContext}
                 />
             }
-            <AreaMenu  width={width < widthMax ? '100vw' : '100vw'}/>
+            <AreaMenu width={width < widthMax ? '100vw' : '100vw'} />
             <AreaInfo>
                 {width > 950 &&
-                    <AreaWinners />
+                    <AreaWinners AuthContext={AuthContext} />
                 }
                 <AreaBody width={width < widthMax ? '92vw' : '570px'}>
                     <MenuMax

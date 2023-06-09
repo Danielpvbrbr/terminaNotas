@@ -31,11 +31,10 @@ export default function AreaSubPubl({ setActive, data, setDataRouter, setRoute, 
 
   return (
     <Container width={width < widthMax ? '82vw' : '545px'} >
-      <img src={`data:image/jpeg;base64,${data.img}`} alt='imgCentral' />
+      <img src={data.img} alt='imgCentral' />
 
       <AreaInfo>
         <h4>{data.title}</h4>
-
         <section>
           {
             Type()

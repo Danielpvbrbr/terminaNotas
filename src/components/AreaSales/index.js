@@ -8,7 +8,7 @@ export default function AreaSales({ key, data, width, privilege, widthMax }) {
   return (
     <Container key={key}>
       <Area width={width < widthMax ? '84vw' : '535px'}>
-        <img src={`data:image/jpeg;base64,${data.img}`} alt='imagem-compras' />
+        <img src={data.img} alt='imagem-compras' />
         {privilege ?
           <section>
             <h4>{data.award}</h4>
@@ -20,7 +20,6 @@ export default function AreaSales({ key, data, width, privilege, widthMax }) {
             <p><span>Cotas:</span> {data.numbers_cota.join()}</p>
           </section>
         }
-
         {!isOpen ?
           <BsChevronRight
             size={35}

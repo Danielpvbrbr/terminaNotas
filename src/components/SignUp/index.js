@@ -45,7 +45,7 @@ export default function SignUp({ width, widthMax, setIsSignUp, AuthContext }) {
         name: name,
         CPF: CPF,
         email: email,
-        phone: phone,
+        phone: cvrtNumber(phone),
         password: password,
         logradouro: logradouro,
         CEP: CEP,
@@ -66,10 +66,10 @@ export default function SignUp({ width, widthMax, setIsSignUp, AuthContext }) {
     async function get() {
       axios.get(`https://viacep.com.br/ws/${CEP}/json/`)
         .then(res => {
-          setNeighborhood(res.data.bairro);
-          setCity(res.data.localidade);
-          setLogradouro(res.data.logradouro);
-          setUF(res.data.uf);
+          res.data.bairro.length > 0 && setNeighborhood(res.data.bairro);
+          res.data.localidade.length > 0 && setCity(res.data.localidade);
+          res.data.logradouro.length > 0 && setLogradouro(res.data.logradouro);
+          res.data.uf.length > 0 && setUF(res.data.uf);
         });
     };
     get();
@@ -85,6 +85,24 @@ export default function SignUp({ width, widthMax, setIsSignUp, AuthContext }) {
 
   if (password.length === isPassword.length && password !== isPassword) {
     alert('Erro: Senhas digitada não correspondentes!');
+  }
+
+  const handlePhone = (event) => {
+    let input = event.target
+    input.value = phoneMask(input.value)
+  }
+
+  const phoneMask = (value) => {
+    if (!value) return ""
+    value = value.replace(/\D/g, '')
+    value = value.replace(/(\d{2})(\d)/, "($1) $2")
+    value = value.replace(/(\d)(\d{4})$/, "$1-$2")
+    return value
+  }
+
+  function cvrtNumber(string) {
+    var numsStr = string.replace(/[^0-9]/g, '');
+    return parseInt(numsStr);
   }
 
   return (
@@ -172,17 +190,18 @@ export default function SignUp({ width, widthMax, setIsSignUp, AuthContext }) {
               isIcon={true}
             />
             <InputLabel
-              type='text'
+              type='tel'
               label='Telefone:'
               name={'phone'}
               value={phone}
+              onKeyUp={handlePhone}
               Icon={BsFillTelephoneFill}
               width={width < widthMax ? '55vw' : '340px'}
               width2={width < widthMax ? '49vw' : '300px'}//Modifica o tamanho do input
               placeholder='Digite seu telefone'
               onChange={e => setPhone(e.target.value)}
               background='#fff'
-              maxLength={11}
+              maxLength={15}
               isIcon={true}
             />
           </section>

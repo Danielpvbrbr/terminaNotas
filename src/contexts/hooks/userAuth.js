@@ -63,6 +63,7 @@ export default function userAuth(EL) {
             phone: data.phone,
             password: data.password
         }).then(res => {
+            console.log(`daomgm${res.data.token}`)
             const data = {
                 token: res.data.token,
                 id: 'LMNOPQRSTUVWXYZa' + res.data.id + 'ijklmn'

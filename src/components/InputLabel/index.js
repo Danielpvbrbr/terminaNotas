@@ -19,7 +19,7 @@ export default function App({
   disabled,
   color,
   readOnly,
-
+  onKeyUp
 }) {
 
   return (
@@ -47,6 +47,7 @@ export default function App({
           placeholder={placeholder}
           maxLength={maxLength}
           name={name}
+          onKeyUp={onKeyUp}
           readOnly={readOnly}
         />
       </span>

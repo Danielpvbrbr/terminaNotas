@@ -13,12 +13,15 @@ import {
 } from './styles';
 import { BsImage, BsFillTrophyFill, BsCurrencyDollar, BsTextareaT } from "react-icons/bs";
 import InputLabel from '../../components/InputLabel';
+import Compress from 'compress.js';
+const compress = new Compress()
 
 export default function AddSweepstakes({ width, AuthContext, data, widthMax }) {
   const {
     addSweepstakes,
     addWinners,
-    purchasesFilter,
+    // purchasesFilter,
+    deleteSweepstakes,
     seachPurchases,
     filterWinner
   } = useContext(AuthContext);
@@ -31,17 +34,21 @@ export default function AddSweepstakes({ width, AuthContext, data, widthMax }) {
   const [selected, setSelected] = useState("");
 
   const onChange = (e) => {
-    if (e.target.files.length <= 0) {
-      return;
-    };
+    const file = e.target.files[0];
+    const target = [...e.target.files]
 
-    let reader = new FileReader();
-
-    reader.onload = () => {
-      setImg(reader.result);
-    };
-
-    setImg(reader.readAsDataURL(e.target.files[0]));
+    if (file !== undefined) {
+      compress.compress(target, {
+        size: 4,
+        quality: 0.75,
+        maxWidth: 1920,
+        maxHeight: 1920,
+        resize: true,
+        rotate: true
+      }).then((result) => {
+        setImg(`data:image/jpeg;base64,${result[0].data}`);
+      })
+    }
   };
 
   const handleClear = () => {
@@ -69,90 +76,41 @@ export default function AddSweepstakes({ width, AuthContext, data, widthMax }) {
   }
 
   const handleSubmit = (type) => {
-    const imgBase64 = (img.split('').splice(23, img.length).join(''));
-
-    // if (
-    //   title.length
-    //   &&
-    //   description.length
-    //   &&
-    //   status.length
-    //   &&
-    //   img.length
-    //   &&
-    //   price > 0
-    // ) {
-    //   
-    // } else {
-    //   alert('E nescessario o preenchimento dos campos.')
-    // }
+    // const imgBase64 = (img.split('').splice(23, img.length).join(''));
 
     if (status === "Concluded") {
-      // addWinners({
-      //   newPublication: type,
-      //   title: title,
-      //   description: description,
-      //   price: price,
-      //   status: status,
-      //   img: imgBase64
-      // })
-      console.log({
+      addWinners({
+        id: data.id,
+        title: title,
+        description: description,
+        price: price,
+        status: status,
+        img: img,
+        cota: cota,
+        winners: selected
+      })
+    } else if (status === "Active" || "Coming") {
+      addSweepstakes({
+        id: data.id,
         newPublication: type,
         title: title,
         description: description,
         price: price,
         status: status,
-        img: imgBase64
+        img: img
       })
-    } else if (status === "Active") {
-      console.log({
-        newPublication: type,
-        title: title,
-        description: description,
-        price: price,
-        status: status,
-        img: imgBase64
-      })
-      // addSweepstakes({
-      //   title: title,
-      //   description: description,
-      //   price: price,
-      //   status: status,
-      //   img: imgBase64
-      // })
 
     }
   };
 
   const handleSeleceted = (v, i) => {
-    setSelected(i);
-    console.log({
-      name: v.buyer,
-      CPF: v.CPF,
-      phone: v.phone,
-      date: "",
-      cota: cota,
-      award: v.award,
-      img: v.img
-    })
-
+    setSelected({
+      pos: i,
+      res: v
+    });
   };
 
-  const formatMoney = (value) => {
-    // value = value + '';
-    // value = parseInt(value.replace(/[\D]+/g, ''));
-    // value = value + '';
-    // value = value.replace(/([0-9]{2})$/g, ",$1");
 
-    // if (value.value > 6) {
-    //   value = value.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$0");
-    // }
-
-    // if(value === 'NaN') value = '';
-    setPrice(value)
-  };
-  console.log(cota > 0 && cota !== "")
-  console.log(cota.length)
   return (
     <Container>
       <Area width={width < widthMax ? '82vw' : '545px'} >
@@ -162,7 +120,7 @@ export default function AddSweepstakes({ width, AuthContext, data, widthMax }) {
               <BsImage size={50} color='#00A3FF' />
               :
               <Preview
-                src={data.img ? `data:image/jpeg;base64,${data.img}` : img}
+                src={data.img ? data.img : img}
                 alt='fone'
                 width={width < widthMax ? '80vw' : '518px'}
               />
@@ -172,7 +130,7 @@ export default function AddSweepstakes({ width, AuthContext, data, widthMax }) {
           <input
             type='file'
             onChange={onChange}
-            disabled={data.status === 'Concluded'}
+            disabled={status === 'Concluded'}
           />
         </AreaUpload>
 
@@ -183,8 +141,8 @@ export default function AddSweepstakes({ width, AuthContext, data, widthMax }) {
             value={title}
             placeholder='Digite o titulo da publicação..'
             label='Título:'
-            disabled={data.status === 'Concluded'}
-            maxLength={120}
+            disabled={status === 'Concluded'}
+            maxLength={78}
             Icon={BsTextareaT}
             width={width < widthMax ? '80vw' : '520px'}
             width2={width < widthMax ? '70vw' : '465px'}//Modifica o tamanho do input
@@ -193,11 +151,11 @@ export default function AddSweepstakes({ width, AuthContext, data, widthMax }) {
           />
           <InputLabel
             type='number'
-            onChange={e => formatMoney(e.target.value)}
+            onChange={e => setPrice(e.target.value)}
             value={price}
             placeholder='0'
             label='Preço:'
-            disabled={data.status === 'Concluded'}
+            disabled={status === 'Concluded'}
             Icon={BsCurrencyDollar}
             width={width < widthMax ? '30vw' : '120px'}
             width2={width < widthMax ? '20vw' : '65px'}//Modifica o tamanho do input
@@ -211,7 +169,7 @@ export default function AddSweepstakes({ width, AuthContext, data, widthMax }) {
             rows="10"
             cols="520"
             width={width < widthMax ? '80vw' : '520px'}
-            disabled={data.status === 'Concluded'}
+            disabled={status === 'Concluded'}
             value={description}
             onChange={e => setDescription(e.target.value)}
             placeholder='Digite a descrição da publicação...'
@@ -249,7 +207,7 @@ export default function AddSweepstakes({ width, AuthContext, data, widthMax }) {
               />
               {cota > 0 && cota !== "" &&
                 filterWinner.map((v, i) =>
-                  <List key={i} onClick={() => handleSeleceted(v, i)} color={selected === i ? "#226c91" : "#00A3FF"}>
+                  <List key={i} onClick={() => handleSeleceted(v, i)} color={selected.pos === i ? "#226c91" : "#00A3FF"}>
                     <p>Comprador: <span>{v.buyer}</span></p>
                     <p>CPF: <span>{v.CPF}</span></p>
                     <p>Telefone: <span>{v.phone}</span></p>
@@ -299,7 +257,7 @@ export default function AddSweepstakes({ width, AuthContext, data, widthMax }) {
             <Button
               bg='#ea777b'
               width={width < widthMax ? '80vw' : '520px'}
-              onClick={() => alert('Deletado')}
+              onClick={() => deleteSweepstakes(data.id)}
             >
               Deletar
             </Button>

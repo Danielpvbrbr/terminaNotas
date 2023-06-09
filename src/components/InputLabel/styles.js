@@ -31,6 +31,14 @@ export const Container = styled.div`
         border:0 ;
         font-size:12pt ;
         border-left:1px solid #B7B7B7;
+ 
     }
-    
+    span input[type=number]::-webkit-inner-spin-button { 
+        -webkit-appearance: none;
+    }
+        
+    span input[type=number] { 
+        -moz-appearance: textfield;
+        appearance: textfield;
+    }
 `;

@@ -19,6 +19,7 @@ export default function AreaDoubt({
       <h4>Inicio</h4>
 
       {sweepstakes.map((v, i) =>
+      // console.log(v.status)
         v.status === 'Active' &&
         <span key={i} >
           {

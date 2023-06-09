@@ -6,7 +6,7 @@ export default function ProdutoView({ dataRouter, width, widthMax }) {
 
   return (
     <Container width={width}>
-      <img src={`data:image/jpeg;base64,${dataRouter.img}`} alt='imgView' />
+      <img src={dataRouter.img} alt='imgView' />
       <div>
         <h4>{dataRouter.title}</h4>
         <p>{dataRouter.description}</p>

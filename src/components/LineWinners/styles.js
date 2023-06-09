@@ -23,7 +23,7 @@ export const Container = styled.section`
         padding:5px ;
     }
     div h4{
-      font-size: 10pt;
+      font-size: 8pt;
       margin:0 ;
       
     }

@@ -48,16 +48,7 @@ export const AreaForm = styled.div`
         align-items:center ;
         margin-top:9px ;
     }
-    span{
-        display:flex ;
-        flex-direction:row ;
-        justify-content:space-between ;
-        align-items:center ;
-    }
-    span svg{
-        margin-left:2px;
-        margin-top:16px
-    }
+  
     
 `;
 
@@ -80,9 +71,26 @@ export const QrCode = styled.img`
       width:200px ;
       height:200px ;
 `;
+
+export const AreaQr = styled.div`
+      width:${props => props.width}vw;
+      height:30px ;
+      display:flex ;
+      flex-direction:row ;
+      justify-content:space-between ;
+      align-items:center ;
+      border-width:0.1
+`;
+
+export const InputCopy = styled.input`
+     width:${props => props.width}vw;
+      height:30px ;
+`;
+
 export const Details = styled.div`
       width:${props => props.width}vw;
       padding:3px 2px 3px;
+
       h2{
         font-size:10.5pt ;
         padding:2.5px ;

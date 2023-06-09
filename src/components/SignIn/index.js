@@ -14,7 +14,7 @@ export default function SignIn({ setIsForm, width, widthMax, setIsSignUp, AuthCo
   const handleSubmit = () => {
     if (phone.length && password.length) {
       signIn({
-        phone: phone,
+        phone: cvrtNumber(phone),
         password: password,
       })
     } else {
@@ -27,6 +27,24 @@ export default function SignIn({ setIsForm, width, widthMax, setIsSignUp, AuthCo
     setIsForm(false);
   };
 
+  const handlePhone = (event) => {
+    let input = event.target
+    input.value = phoneMask(input.value)
+  }
+
+  const phoneMask = (value) => {
+    if (!value) return ""
+    value = value.replace(/\D/g, '')
+    value = value.replace(/(\d{2})(\d)/, "($1) $2")
+    value = value.replace(/(\d)(\d{4})$/, "$1-$2")
+    return value
+  }
+
+  function cvrtNumber(string) {
+    var numsStr = string.replace(/[^0-9]/g, '');
+    return parseInt(numsStr);
+  }
+  
   return (
     <>
       {
@@ -53,10 +71,11 @@ export default function SignIn({ setIsForm, width, widthMax, setIsSignUp, AuthCo
               </header>
               <section>
                 <InputLabel
-                  type='number'
+                  type='tel'
                   label='Telefone:'
+                  onKeyUp={handlePhone}
                   value={phone}
-                  maxLength={11}
+                  maxLength={15}
                   Icon={BsFillTelephoneFill}
                   width={width < widthMax ? '56vw' : '370px'}
                   width2={width < widthMax ? '50vw' : '330px'}//Modifica o tamanho do input

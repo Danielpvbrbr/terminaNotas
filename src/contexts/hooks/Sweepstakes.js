@@ -11,9 +11,14 @@ export default function Sweepstakes(El) {
     const [qrCode, setqrCode] = useState([]);
     const [purchasesFilter, setPurchasesFilter] = useState([]);
     const [filterWinner, setFilterWinner] = useState([]);
+    const [winners, setWinners] = useState([]);
+
 
     useEffect(() => {
-        function getSweepstakes() {
+        function get() {
+            El.socket.on('Winners', (res) => {
+                setWinners(res.response);
+            });
             El.socket.on('Sweepstakes', (res) => {
                 setSweepstakes(res.response);
             });
@@ -42,7 +47,7 @@ export default function Sweepstakes(El) {
                 };
             });
         };
-        getSweepstakes();
+        get();
     });
     async function seachPurchases(id, filter) {
         if (veryAuth(El.myId, El.setAuth, El.setAuthenticated)) {
@@ -53,8 +58,7 @@ export default function Sweepstakes(El) {
                 setFilterWinner(res.data);
             })
 
-        };
-
+        }
     };
 
     async function sendPurchases(data) {
@@ -86,14 +90,50 @@ export default function Sweepstakes(El) {
     };
 
     async function addSweepstakes(data) {
+
         if (veryAuth(El.myId, El.setAuth, El.setAuthenticated)) {
-            await api.post('/AddSweepstakes', {
-                description: data.description,
-                img: data.img,
-                price: data.price,
-                status: data.status,
-                title: data.title,
-                qtd: data.qtd
+            if (data.newPublication) {
+                await api.post('/AddSweepstakes', {
+                    description: data.description,
+                    img: data.img,
+                    price: data.price,
+                    status: data.status,
+                    title: data.title,
+                    qtd: data.qtd
+                }, El.storage.config).then(res => {
+                    if (res.status === 200) {
+                        alert(res.data.message);
+                        window.location.reload()
+                    } else {
+                        alert(res.data.message)
+                    }
+                })
+            } else {
+                await api.post('/updateSweepstakes', {
+                    description: data.description,
+                    img: data.img,
+                    price: data.price,
+                    status: data.status,
+                    title: data.title,
+                    qtd: data.qtd,
+                    id: data.id
+                }, El.storage.config).then(res => {
+                    if (res.status === 200) {
+                        alert(res.data.message);
+                        window.location.reload()
+                    } else {
+                        alert(res.data.message)
+                    }
+                })
+            }
+
+        };
+    };
+
+    async function deleteSweepstakes(id) {
+        if (veryAuth(El.myId, El.setAuth, El.setAuthenticated)) {
+            await api.post('/deleteSweepstakes', {
+                id: id
             }, El.storage.config).then(res => {
                 if (res.status === 200) {
                     alert(res.data.message);
@@ -104,26 +144,27 @@ export default function Sweepstakes(El) {
             })
         };
     };
-
     async function addWinners(data) {
         if (veryAuth(El.myId, El.setAuth, El.setAuthenticated)) {
-            console.log(addWinners)
-            // if()
-            // await api.post('/AddSweepstakes', {
-            //     description: data.description,
-            //     img: data.img,
-            //     price: data.price,
-            //     status: data.status,
-            //     title: data.title,
-            //     qtd: data.qtd
-            // }, El.storage.config).then(res => {
-            //     if (res.status === 200) {
-            //         alert(res.data.message);
-            //         window.location.reload()
-            //     } else {
-            //         alert(res.data.message)
-            //     }
-            // })
+            await api.post('/addWinners', {
+                name: data.winners.res.buyer,
+                status: data.status,
+                id: data.id,
+                CPF: data.winners.res.CPF,
+                phone: data.winners.res.phone,
+                cota: data.cota,
+                price: data.winners.res.price,
+                award: data.winners.res.award,
+                img: data.img,
+                id_award: data.winners.res.id_award
+            }, El.storage.config).then(res => {
+                if (res.status === 200) {
+                    alert(res.data.message);
+                    window.location.reload()
+                } else {
+                    alert(res.data.message)
+                }
+            })
         };
     };
 
@@ -139,7 +180,9 @@ export default function Sweepstakes(El) {
         qrCode,
         res_purchases,
         addWinners,
-        filterWinner
+        filterWinner,
+        deleteSweepstakes,
+        winners
     }
 
 }
