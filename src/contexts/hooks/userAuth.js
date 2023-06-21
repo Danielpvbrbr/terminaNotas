@@ -64,7 +64,6 @@ export default function userAuth(EL) {
 
     useEffect(() => {
         async function Auth() {
-            console.log(!leading)
             if (!leading ) {
                 EL.socket.emit('fullUser', myId);
                 await api.post('/auth', { id: myId })
@@ -82,6 +81,7 @@ export default function userAuth(EL) {
                             setAuthenticated(false);
                             api.defaults.headers.common['x-access-token'] = undefined;
                             api.post('/logout');
+                            window.location.reload();
                         };
                     });
 
