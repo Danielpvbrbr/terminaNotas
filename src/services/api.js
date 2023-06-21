@@ -1,7 +1,7 @@
 import axios from "axios";
 
 let api = axios.create({
-  baseURL: 'http://localhost:4000',//http://localhost:4000 //https://vps47428.publiccloud.com.br
+  baseURL: 'https://vps47428.publiccloud.com.br',//http://localhost:4000 //https://vps47428.publiccloud.com.br
   withCredentials: false,
 });
 
