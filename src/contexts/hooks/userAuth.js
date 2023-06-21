@@ -36,11 +36,14 @@ export default function userAuth(EL) {
                 EL.socket.emit('fullUser', myId);
                 await api.post('/auth', { id: myId })
                     .then(res => {
+                        console.log('Logado')
+                        console.log(res)
                         setAuth(res.data);
                     }).catch(err => {
                         const { isAuth } = err.response.data;
                         if (!isAuth) {
                             console.log('Deslogar');
+                            console.log(err.response.data)
                             setAuth([])
                             localStorage.clear();
                             setAuthenticated(false);
@@ -63,24 +66,27 @@ export default function userAuth(EL) {
             phone: data.phone,
             password: data.password
         }).then(res => {
-            console.log(`daomgm${res.data.token}`)
             const data = {
                 token: res.data.token,
                 id: 'LMNOPQRSTUVWXYZa' + res.data.id + 'ijklmn'
             };
-            storageUser(data);
-            api.defaults.headers.common['x-access-token'] = res.data.token;
-            setAuthenticated(res.data.auth);
-            setIsSignIn(false);
-            window.location.reload();
+            if (data.token) {
+                storageUser(data);
+                api.defaults.headers.common['x-access-token'] = res.data.token;
+                setAuthenticated(res.data.auth);
+                setIsSignIn(false);
+            } else {
+                console.log('err')
+            }
         }).catch(err => {
             alert(err.response.data.message)
         })
     };
 
-    async function storageUser(data) {
+    function storageUser(data) {
         localStorage.setItem('token', JSON.stringify(data.token));
         localStorage.setItem('id', JSON.stringify(data.id));
+        window.location.reload();
     };
 
     async function signUp(data) {
@@ -106,8 +112,7 @@ export default function userAuth(EL) {
             storageUser(data);
             setIsSignUp(false);
             api.defaults.headers.common['x-access-token'] = res.data.token;
-            setAuthenticated(res.data.auth);
-            window.location.reload();
+            // setAuthenticated(res.data.auth);
         }).catch(err => {
             alert(err.response.data.message);
         })
@@ -134,7 +139,6 @@ export default function userAuth(EL) {
                 })
         };
     }
-
 
     function recoverPass(res) {
         setChecking(true);

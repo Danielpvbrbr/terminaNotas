@@ -49,6 +49,7 @@ export default function Sweepstakes(El) {
         };
         get();
     });
+
     async function seachPurchases(id, filter) {
         if (veryAuth(El.myId, El.setAuth, El.setAuthenticated)) {
             await api.post('/seachPurchases', {
@@ -99,7 +100,8 @@ export default function Sweepstakes(El) {
                     price: data.price,
                     status: data.status,
                     title: data.title,
-                    qtd: data.qtd
+                    qtd: data.qtd,
+                    topo:false
                 }, El.storage.config).then(res => {
                     if (res.status === 200) {
                         alert(res.data.message);
@@ -116,7 +118,7 @@ export default function Sweepstakes(El) {
                     status: data.status,
                     title: data.title,
                     qtd: data.qtd,
-                    id: data.id
+                    id: data.id,
                 }, El.storage.config).then(res => {
                     if (res.status === 200) {
                         alert(res.data.message);
