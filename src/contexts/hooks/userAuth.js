@@ -22,22 +22,55 @@ export default function userAuth(EL) {
         if (EL.storage.myToken) {
             setAuthenticated(true);
             setMyId(getRandom(EL.storage.myId));
+            setLoading(false);
         };
-        setLoading(false);
+
     }, [EL, EL.storage.myId, EL.storage.myToken]);
 
     function getRandom(max) {
         return max.replace(/\D+/g, '');
     };
 
+    // useEffect(() => {
+    //     async function Auth() {
+    //         console.log(!leading)
+    //         if (!leading) {
+    //             EL.socket.emit('fullUser', myId);
+    //             await api.post('/auth', { id: myId })
+    //                 .then(res => {
+    //                     console.log('Logado')
+    //                     // console.log(res)
+    //                     setAuth(res.data);
+    //                 }).catch(err => {
+    //                     const { isAuth } = err.response.data;
+    //                     if (!isAuth) {
+    //                         console.log('Deslogar');
+    //                         console.log(err.response.data)
+    //                         setAuth([])
+    //                         localStorage.clear();
+    //                         setAuthenticated(false);
+    //                         api.defaults.headers.common['x-access-token'] = undefined;
+    //                         api.post('/logout');
+    //                     };
+    //                 });
+
+    //             await EL.socket.on('fullUser', (data) => {
+    //                 setFullUser(data.response);
+    //             });
+    //         };
+    //     };
+    //     Auth();
+    // }, [EL.socket, leading, myId]);
+
     useEffect(() => {
         async function Auth() {
-            if (!leading) {
+            console.log(!leading)
+            if (!leading ) {
                 EL.socket.emit('fullUser', myId);
                 await api.post('/auth', { id: myId })
                     .then(res => {
                         console.log('Logado')
-                        console.log(res)
+                        // console.log(res)
                         setAuth(res.data);
                     }).catch(err => {
                         const { isAuth } = err.response.data;
@@ -59,8 +92,7 @@ export default function userAuth(EL) {
         };
         Auth();
     }, [EL.socket, leading, myId]);
-
-
+    
     async function signIn(data) {
         await api.post('/signIn', {
             phone: data.phone,
