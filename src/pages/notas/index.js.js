@@ -69,7 +69,7 @@ const Main = () => {
   return (
     <Container>
       <Area width={width < 500 ? `${width}px` : `${300}px`}>
-        <AreaTitle width={width < 500 ? `${width-2}px` : `${300}px`}>
+        <AreaTitle width={width < 500 ? `${width-2}px` : `${298}px`}>
           {isTitle ?
             <Title onClick={() => setIsTitle(false)}>{title.length < 1 ? "Escreva seu nome" : title}</Title>
             :
@@ -80,7 +80,7 @@ const Main = () => {
               onKeyDown={e => e.keyCode === 13 && setIsTitle(true)} />
           }
         </AreaTitle>
-        <AreaBody width={width < 500 ? `${width-20}px` : `${300}px`}>
+        <AreaBody width={width < 500 ? `${width-20}px` : `${289}px`}>
           {list.map((v, i) =>
             v.type === 2 ?
               <NameSpecial>{i = 1 + i++}. {v.name}  <BsFillStarFill color="#FFFF00" /></NameSpecial>
@@ -95,7 +95,7 @@ const Main = () => {
             onKeyDown={e => Send(e)}
           />
         </AreaBody>
-        <AreaControl width={width < 500 ? `${width-20}px` : `${300}px`}>
+        <AreaControl width={width < 500 ? `${width-20}px` : `${284}px`}>
           <AreaInfo>
             <ImgInfo onClick={buttonFlower}>
               <img src={rosa} alt="flor" />

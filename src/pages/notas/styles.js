@@ -1,22 +1,41 @@
 import styled, { keyframes } from 'styled-components';
 const special = keyframes`
-  from {
-    color: #00FF7F ;
+  10% {
+    color: #FF4500 ;
   }
 
-  to {
-    color: #FF00FF ;
+  40% {
+    color: #FFFF00 ;
+  }
+  60%{
+    color: #FFD700 ;
+  }
+  80%{
+    color: #00FF00 ;
+  }
+  100%{
+    color: #FF0000 ;
   }
 `;
 
 const star = keyframes`
-  from {
-    color: #FFD700 ;
+  10% {
+    color: #FFFF00 ;
+    width: 5px;
   }
-
-  to {
-    color:  #FFFF00 ;
+  20% {
+    color:  #FFD700 ;
+    width: 20px;
    
+  }
+  50% {
+    color:  #FFD700 ;
+    width: 20px;
+   
+  }
+  100%{
+    color:  #FFD700 ;
+    width: 30px;
   }
 `;
 export const Container = styled.div`
@@ -80,6 +99,7 @@ export const NameSpecial = styled.h4`
 
    svg{
     animation: ${star} 2s linear infinite;
+  
    }
 `;
 export const Input = styled.input`
