@@ -1,6 +1,6 @@
 {
-  "short_name": "RódoValeBr",
-  "name": "RódoValeBr",
+  "short_name": "TerminalTikTok",
+  "name": "TerminalTikTok",
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,12 +8,12 @@
       "type": "image/x-icon"
     },
     {
-      "src": "rodovalebr.png",
+      "src": "rosa.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "rodovalebr.png",
+      "src": "rosa.png",
       "type": "image/png",
       "sizes": "512x512"
     }
