@@ -36,7 +36,7 @@ export const Area = styled.div`
     border-radius:10px ;
 `;
 export const AreaTitle = styled.div`
-    width:298px;
+    width:${props => props.width};
     height: 40px;
     display:flex ;
     justify-content:center ;
@@ -55,7 +55,7 @@ export const AreaTitle = styled.div`
 `;
 
 export const AreaBody = styled.div`
-    width:280px;
+    width:${props => props.width};
     height: 80vh;
     overflow-y:scroll ;
     margin-bottom:10px ;
@@ -92,7 +92,7 @@ export const Input = styled.input`
    margin-bottom: 12px;
 `;
 export const AreaControl = styled.div`
-    width:280px;
+    width:${props => props.width};
     height: 170px;
     background-color: #244edb;
     border: 2px solid #fff ;
@@ -100,7 +100,7 @@ export const AreaControl = styled.div`
     margin-bottom:10px ;
 `;
 export const AreaInfo = styled.div`
-    width:280px;
+    width:${props => props.width};
     height: 150px;
     display:flex;
     flex-direction:column ;
