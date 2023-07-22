@@ -98,18 +98,18 @@ const Main = () => {
         <AreaControl width={width < 500 ? `${width-20}px` : `${284}px`}>
           <AreaInfo>
             <ImgInfo onClick={buttonFlower}>
-              <img src={rosa} alt="flor" />
-              <h4> =  Nome</h4>
+              {/* <img src={rosa} alt="flor" /> */}
+              <h4> Coração no Nome </h4>
             </ImgInfo>
 
             <ImgInfo onClick={buttonPanda}>
-              <img src={panda} alt="panda" />
-              <h4> = Nome Em Destaque</h4>
+              {/* <img src={panda} alt="panda" /> */}
+              <h4> Nome Em Destaque</h4>
             </ImgInfo>
 
             <ImgInfo onClick={clearAll}>
-              <img src={bone} alt="bone" />
-              <h4> = Limpar Ludo</h4>
+              {/* <img src={bone} alt="bone" /> */}
+              <h4> Limpar Ludo</h4>
             </ImgInfo>
           </AreaInfo>
         </AreaControl>
