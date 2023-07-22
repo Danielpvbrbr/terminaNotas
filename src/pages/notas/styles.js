@@ -1,4 +1,4 @@
-import styled,{keyframes} from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 const special = keyframes`
   from {
     color: #00FF7F ;
@@ -26,7 +26,7 @@ export const Container = styled.div`
 `;
 
 export const Area = styled.div`
-    width:300px;
+    width:${props => props.width};
     height: 100vh;
     background-color: #4169E1;
     border:1px solid #ffff ;

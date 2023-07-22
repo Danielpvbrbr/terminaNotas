@@ -1,4 +1,4 @@
-import React, { useState,useRef,useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Container, Area, AreaTitle, AreaBody, Title, Name, Input, AreaControl, AreaInfo, ImgInfo, NameSpecial } from './styles';
 import rosa from "./Img/rosa.png";
 import panda from "./Img/panda.png";
@@ -6,6 +6,8 @@ import bone from "./Img/bone.png";
 import { BsFillStarFill } from "react-icons/bs";
 
 const Main = () => {
+  window.onresize = start;
+  const [width, setWidth] = useState('' || window.screen.width);
   const scroll = useRef(null)
   const [title, setTitle] = useState("Live");
   const [isTitle, setIsTitle] = useState(true);
@@ -24,6 +26,7 @@ const Main = () => {
       }]);
     }
   };
+
 
   const buttonFlower = () => {
     if (name.length > 0) {
@@ -46,17 +49,26 @@ const Main = () => {
       }]);
     }
   };
+
   const scrollToBottom = () => {
     scroll.current?.scrollIntoView({ behavior: "smooth" })
-}
+  }
 
-useEffect(() => {
+  const clearAll = () => {
+    setList([]);
+    setName("")
+  }
+  useEffect(() => {
     scrollToBottom();
-}, [list]);
+  }, [list]);
+
+  function start() {
+    setWidth(document.documentElement.clientWidth);
+  };
 
   return (
     <Container>
-      <Area>
+      <Area width={width < 500 ? `${width}px` : `${300}px`}>
         <AreaTitle>
           {isTitle ?
             <Title onClick={() => setIsTitle(false)}>{title.length < 1 ? "Escreva seu nome" : title}</Title>
@@ -95,7 +107,7 @@ useEffect(() => {
               <h4> = Nome Em Destaque</h4>
             </ImgInfo>
 
-            <ImgInfo onClick={() => setList([])}>
+            <ImgInfo onClick={clearAll}>
               <img src={bone} alt="bone" />
               <h4> = Limpar Ludo</h4>
             </ImgInfo>
