@@ -30,7 +30,7 @@ code {
 export const Container = styled.div`
     width:99vw ;
     height: 99vh;
-    background-color: #ffffff;
+    background-color: #4682B4;
     border:1px solid red ;
 `;
 

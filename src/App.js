@@ -1,12 +1,9 @@
 import React from "react";
-import AuthProvider from './contexts/auth';
-import Routes from '../src/pages/';
+import Main from './pages/notas/index.js.js';
 
 const App = () => {
     return (
-        <AuthProvider>
-            <Routes  />
-        </AuthProvider>
+        <Main />
     )
 };
 
