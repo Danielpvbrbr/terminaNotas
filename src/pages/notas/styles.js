@@ -42,11 +42,12 @@ export const Container = styled.div`
     width:100vw;
     height: 100vh;
     background-color: #363636	;
+    display:flex ;
+    align-items:center ;
 `;
-
 export const Area = styled.div`
     width:${props => props.width};
-    height: 100vh;
+    height: 90vh;
     background-color: #4169E1;
     border:1px solid #ffff ;
     display:flex ;
@@ -113,25 +114,25 @@ export const Input = styled.input`
 `;
 export const AreaControl = styled.div`
     width:${props => props.width};
-    height: 170px;
+    height:50px;
     background-color: #244edb;
     border: 2px solid #fff ;
     border-radius:10px ;
     margin-bottom:10px ;
+    padding:10px ;
 `;
 export const AreaInfo = styled.div`
     width:${props => props.width};
-    height: 150px;
+    height: 10px;
     display:flex;
     flex-direction:column ;
-
 `;
 export const ImgInfo = styled.div`
-    width:280px;
-    height: 50px;
+    width:${props => props.width};
     display:flex;
     flex-direction:row ;
     align-items:center ;
+    justify-content:center ;
     cursor:pointer;
 
     img{

@@ -15,32 +15,19 @@ const Main = () => {
   const [name, setName] = useState("");
   const [gift, setGift] = useState(false);
   const [type, setType] = useState(1);
+  const [press, setPress] = useState([]);
 
   const Send = (e) => {
     if (e.keyCode === 13 && name.length > 0) {
       setName("")
       setList([...list, {
-        name: name,
+        name: `${name} 🧡`,
         gift: gift,
         type: type
       }]);
     }
-  };
 
-
-  const buttonFlower = () => {
-    if (name.length > 0) {
-      setName("")
-      setList([...list, {
-        name: `${name} 🧡`,
-        gift: gift,
-        type: 1
-      }]);
-    }
-  };
-
-  const buttonPanda = () => {
-    if (name.length > 0) {
+    if (e.keyCode === 17 && name.length > 0) {
       setName("")
       setList([...list, {
         name: name,
@@ -49,6 +36,7 @@ const Main = () => {
       }]);
     }
   };
+
 
   const scrollToBottom = () => {
     scroll.current?.scrollIntoView({ behavior: "smooth" })
@@ -69,7 +57,7 @@ const Main = () => {
   return (
     <Container>
       <Area width={width < 500 ? `${width}px` : `${300}px`}>
-        <AreaTitle width={width < 500 ? `${width-2}px` : `${298}px`}>
+        <AreaTitle width={width < 500 ? `${width - 2}px` : `${298}px`}>
           {isTitle ?
             <Title onClick={() => setIsTitle(false)}>{title.length < 1 ? "Escreva seu nome" : title}</Title>
             :
@@ -80,7 +68,7 @@ const Main = () => {
               onKeyDown={e => e.keyCode === 13 && setIsTitle(true)} />
           }
         </AreaTitle>
-        <AreaBody width={width < 500 ? `${width-20}px` : `${289}px`}>
+        <AreaBody width={width < 500 ? `${width - 20}px` : `${289}px`}>
           {list.map((v, i) =>
             v.type === 2 ?
               <NameSpecial>{i = 1 + i++}. {v.name}  <BsFillStarFill color="#FFFF00" /></NameSpecial>
@@ -95,21 +83,11 @@ const Main = () => {
             onKeyDown={e => Send(e)}
           />
         </AreaBody>
-        <AreaControl width={width < 500 ? `${width-20}px` : `${284}px`}>
+        <AreaControl width={width < 500 ? `${width - 20}px` : `${284}px`}>
           <AreaInfo>
-            <ImgInfo onClick={buttonFlower}>
-              {/* <img src={rosa} alt="flor" /> */}
-              <h4> Coração no Nome </h4>
-            </ImgInfo>
-
-            <ImgInfo onClick={buttonPanda}>
-              {/* <img src={panda} alt="panda" /> */}
-              <h4> Nome Em Destaque</h4>
-            </ImgInfo>
-
             <ImgInfo onClick={clearAll}>
               {/* <img src={bone} alt="bone" /> */}
-              <h4> Limpar Ludo</h4>
+              <h4>Limpar Tudo</h4>
             </ImgInfo>
           </AreaInfo>
         </AreaControl>
